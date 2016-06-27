@@ -1,4 +1,4 @@
-var prData = require('./api-stuff.js');
+var prData = require('./api-basics.js');
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
@@ -45,27 +45,29 @@ database.insert = function(col, newDoc, callback) {
 
 /*#######################################[-Stat Collection-]#################################################*/
 
-database.getParticipants = function(firstTournament, lastTournament, callback) {
-    var result = {};
+// database.getParticipants = function(firstTournament, lastTournament, callback) {
+//     var result = {};
+//
+//     if (lastTournament - firstTournament > 100) {
+//         console.log("Heck no that's too many tournaments");
+//         return result;
+//     }
+//
+//     for (var i = firstTournament; i <= lastTournament; i++) {
+//
+//         prData.showTournament('smasheville' + i, function(data) {
+//             console.log(data.tournament.name);
+//             result[data.tournament.name] = data;
+//
+//             if (data.tournament.name == 'SmAsheville' + lastTournament) {
+//                 console.log(Object.keys(result));
+//                 callback(result);
+//             }
+//         });
+//     }
+// }
 
-    if (lastTournament - firstTournament > 100) {
-        console.log("Heck no that's too many tournaments");
-        return result;
-    }
-
-    for (var i = firstTournament; i <= lastTournament; i++) {
-
-        prData.showTournament('smasheville' + i, function(data) {
-            console.log(data.tournament.name);
-            result[data.tournament.name] = data;
-
-            if (data.tournament.name == 'SmAsheville' + lastTournament) {
-                console.log(Object.keys(result));
-                callback(result);
-            }
-        });
-    }
-}
+// lets do this entire thing over but with promises and smarter.
 
 module.exports = database;
 

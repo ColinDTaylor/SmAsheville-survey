@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var prData = require('../public/javascripts/api-stuff.js');
+var prData = require('../public/javascripts/api-basics.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

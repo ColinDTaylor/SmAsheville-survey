@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var database = require('../public/javascripts/database.js');
-var prData = require('../public/javascripts/api-stuff.js');
+var prData = require('../public/javascripts/api-basics.js');
 
 /* GET stats listing */
 router.get('/', function(req, res, next) {
