@@ -1,22 +1,23 @@
-var prData = require('./api-basics.js');
+var challongeApi = require('./api-basics.js');
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
 
 // Connection URL
-var url = 'mongodb://localhost:27017/prDataTest';
+var url = 'mongodb://localhost:27017/challongeApiTest';
 
 var database = {};
 var dbObj = {};
 
+
+// TODO: make this less awkward
 database.connect = function(callback) {
 
     // Use connect method to connect to the server
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
       dbObj = db;
-      console.log("Connected succesfully to server");
-      callback();
+    callback();
     });
 }
 
@@ -26,48 +27,21 @@ database.close = function() {
 }
 
 database.insert = function(col, newDoc, callback) {
-  database.connect(function(){
 
-      // Get the collection
-      var collection = dbObj.collection(col);
-      // Insert some documents
-      collection.insert(
+    // Get the collection
+    var collection = dbObj.collection(col);
+    // Insert some documents
+    collection.insert(
         newDoc,
         function(err, result) {
-        assert.equal(err, null);
-        assert.equal(1, result.result.n);
-        assert.equal(1, result.ops.length);
-        console.log("Inserted sum documents into the collection");
-        callback(result);
-      });
+            assert.equal(err, null);
+            assert.equal(1, result.result.n);
+            assert.equal(1, result.ops.length);
+            console.log("Inserted sum documents into the collection");
+            callback(result);
     });
+
 }
-
-/*#######################################[-Stat Collection-]#################################################*/
-
-// database.getParticipants = function(firstTournament, lastTournament, callback) {
-//     var result = {};
-//
-//     if (lastTournament - firstTournament > 100) {
-//         console.log("Heck no that's too many tournaments");
-//         return result;
-//     }
-//
-//     for (var i = firstTournament; i <= lastTournament; i++) {
-//
-//         prData.showTournament('smasheville' + i, function(data) {
-//             console.log(data.tournament.name);
-//             result[data.tournament.name] = data;
-//
-//             if (data.tournament.name == 'SmAsheville' + lastTournament) {
-//                 console.log(Object.keys(result));
-//                 callback(result);
-//             }
-//         });
-//     }
-// }
-
-// lets do this entire thing over but with promises and smarter.
 
 module.exports = database;
 

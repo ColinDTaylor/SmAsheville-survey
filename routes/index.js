@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var prData = require('../public/javascripts/api-basics.js');
+var challongeApi = require('../public/javascripts/api-basics.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express',
                         test:   'Im gay'
-                        // test:   prData(function(data){
+                        // test:   challongeApi(function(data){
                         //     toString((data))
                         // })
                     });

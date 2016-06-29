@@ -11,7 +11,7 @@ var stats = require('./routes/stats');
 
 var app = express();
 
-// var prData = require('./public/javascripts/api-basics.js');
+// var challongeApi = require('./public/javascripts/api-basics.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -5,34 +5,57 @@ var client = challonge.createClient({
     apiKey: 'hvA3eLb7hzOGS5py3PM3ZaGJAlRHTACaktnlobkQ'
 });
 
-var prData = {};
+var challongeApi = {};
 
 // database.testConnection();
 
 /*--------------------TOURNAMENTS-----------------------*/
 
-prData.indexTournaments = function(callback) {
-    client.tournaments.index({
-        callback: function(err, data){
-            if (err) { console.log(err); return; }
-            callback(data);
-        }
+// challongeApi.indexTournaments = function(callback) {
+//     client.tournaments.index({
+//         callback: function(err, data){
+//             if (err) { console.log(err); return; }
+//             callback(data);
+//         }
+//     });
+// }
+
+// challongeApi.showTournament = function(t_id, callback) {
+//     client.tournaments.show({
+//         id :    t_id,
+//         callback: function(err, data){
+//             if (err) { console.log(err); return; }
+//             callback(data);
+//         }
+//     });
+// }
+
+challongeApi.indexTournaments = function() {
+    return new Promise(function (resolve, reject) {
+        client.tournaments.index({
+            callback: function(err, data){
+                if (err) { console.log(err); reject("WHOOPS"); }
+                resolve(data);
+            }
+        });
     });
 }
 
-prData.showTournament = function(t_id, callback) {
-    client.tournaments.show({
-        id :    t_id,
-        callback: function(err, data){
-            if (err) { console.log(err); return; }
-            callback(data);
-        }
+challongeApi.showTournament = function(t_id) {
+    return new Promise(function (resolve, reject) {
+        client.tournaments.show({
+            id :    t_id,
+            callback: function(err, data){
+                if (err) { console.log(err); reject("WHOOPS"); }
+                resolve(data);
+            }
+        });
     });
 }
 
 /*--------------------PARTICIPANTS-----------------------*/
 
-prData.indexParticipants = function(t_id, callback) {
+challongeApi.indexParticipants = function(t_id, callback) {
     client.participants.index({
         id : t_id,
         callback: function(err, data){
@@ -42,7 +65,7 @@ prData.indexParticipants = function(t_id, callback) {
     });
 }
 
-prData.showParticipant = function(t_id, p_id, callback) {
+challongeApi.showParticipant = function(t_id, p_id, callback) {
     client.participants.show({
         id : t_id,
         participantId : p_id,
@@ -55,7 +78,7 @@ prData.showParticipant = function(t_id, p_id, callback) {
 
 /*--------------------MATCHES-----------------------*/
 
-prData.indexMatches = function(t_id, callback) {
+challongeApi.indexMatches = function(t_id, callback) {
     client.matches.index({
         id : t_id,
         callback: function(err, data){
@@ -65,7 +88,7 @@ prData.indexMatches = function(t_id, callback) {
     });
 }
 
-prData.showMatch = function(t_id, m_id, callback) {
+challongeApi.showMatch = function(t_id, m_id, callback) {
     client.matches.show({
         id :    t_id,
         matchId : m_id,
@@ -76,4 +99,4 @@ prData.showMatch = function(t_id, m_id, callback) {
     });
 }
 
-module.exports = prData;
+module.exports = challongeApi;
