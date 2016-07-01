@@ -11,13 +11,23 @@ var dbObj = {};
 
 
 // TODO: make this less awkward
-database.connect = function(callback) {
+database.connect = function() {
 
     // Use connect method to connect to the server
-    MongoClient.connect(url, function(err, db) {
-      assert.equal(null, err);
-      dbObj = db;
-    callback();
+
+    var dbObj = new Promise(function (resolve, reject) {
+        MongoClient.connect(url, function(err, db) {
+          //assert.equal(null, err);
+          if (err){
+            console.log('SOMTHING WENT SOUTH');
+            reject();
+          }
+          resolve(db);
+        });
+    });
+
+    return dbObj.then(function (db) {
+        return db
     });
 }
 
@@ -26,10 +36,10 @@ database.close = function() {
     console.log("Disconnected succesfully from server");
 }
 
-database.insert = function(col, newDoc, callback) {
+database.insert = function(db, col, newDoc, callback) {
 
     // Get the collection
-    var collection = dbObj.collection(col);
+    var collection = db.collection(col);
     // Insert some documents
     collection.insert(
         newDoc,
@@ -38,7 +48,8 @@ database.insert = function(col, newDoc, callback) {
             assert.equal(1, result.result.n);
             assert.equal(1, result.ops.length);
             console.log("Inserted sum documents into the collection");
-            callback(result);
+
+            callback();
     });
 
 }

@@ -17,23 +17,38 @@ stats.getTournaments = function(firstTournament, lastTournament) {
     }
 
     return Promise.all(promiseArray).then(function(data) {
-        console.log('succesfully got data');
 
-        return formatData(data);
+        // this add an _id field that is equal to the weekly's number (for mongo)
+        for (item of data) {
+            item.tournament._id = item.tournament.name.substring(11, 13);
+        }
+
+        return data;
     });
 }
 
 // Fix challonge's awkward formatting
+// TODO: FIX THIS HORRIBLE MONSTER
 function formatData(data) {
+    //
+    // var formattedData = {};
+    //
+    // data.forEach(function (item) {
+    //     item. = item.tournament;
+    // });
 
-    var formattedData = {};
+    // for (var key in formattedData) {
+    //     if (!formattedData.hasOwnProperty(key)) continue;
+    //
+    //     var tournament = formattedData[key];
+    //
+    //     outPutArray.push(tournament);
+    //     console.log(key);
+    // }
 
-    data.forEach(function (item) {
-        console.log(item.tournament.name);
-        formattedData[item.tournament.name] = item.tournament;
-    });
+    // console.log(formattedData);
 
-    return formattedData;
+    return data;
 }
 
 stats.populateDatabase = function(data) {
