@@ -8,42 +8,11 @@ var assert = require('assert');
 /* GET stats listing */
 router.get('/', function(req, res, next) {
 
-    //TODO: make this monster its own function in stat-functions
     stats.getTournaments(60, 72).then(function(data) {
 
-        console.log('succesfully got data');
+        console.log('succesfully got data from challonge');
 
-        database.connect('SmAsheville').then(function (db) {
-            console.log('connected to mongoDB');
-
-            var collection = db.collection('tournaments');
-            var promiseArray = [];
-
-            for (var item of data) {
-
-                // TODO: make this separate from the loop
-                promiseArray.push(new Promise (function (resolve, reject) {
-
-                    collection.insert(
-                        item.tournament,
-
-                        function(err, result) {
-                            assert.equal(err, null);
-                            assert.equal(1, result.result.n);
-                            assert.equal(1, result.ops.length);
-                            console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
-                        });
-                }));
-            }
-
-            Promise.all(promiseArray).then(function () {
-                console.log('all inserts done, closing...');
-                db.close();
-                console.log('closed');
-            });
-
-        });
-
+        database.populateTournaments(data, "lastoftoaday");
     });
 
     res.send("stats r 4 nedrs");
@@ -52,6 +21,18 @@ router.get('/', function(req, res, next) {
 module.exports = router;
 
 
+// promiseArray.push(new Promise (function (resolve, reject) {
+//
+//     collection.insert(
+//         item.tournament,
+//
+//         function(err, result) {
+//             assert.equal(err, null);
+//             assert.equal(1, result.result.n);
+//             assert.equal(1, result.ops.length);
+//             console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
+//         });
+// }));
 
 
 
