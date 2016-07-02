@@ -19,41 +19,32 @@ stats.getTournaments = function(firstTournament, lastTournament) {
     return Promise.all(promiseArray).then(function(data) {
 
         // this add an _id field that is equal to the weekly's number (for mongo)
-        for (item of data) {
+        for (var item of data) {
             item.tournament._id = item.tournament.name.substring(11, 13);
         }
 
         return data;
     });
-}
+};
 
-// Fix challonge's awkward formatting
-// TODO: FIX THIS HORRIBLE MONSTER
-function formatData(data) {
-    //
-    // var formattedData = {};
-    //
-    // data.forEach(function (item) {
-    //     item. = item.tournament;
-    // });
+promiseArray.push(new Promise (function (resolve, reject) {
 
-    // for (var key in formattedData) {
-    //     if (!formattedData.hasOwnProperty(key)) continue;
-    //
-    //     var tournament = formattedData[key];
-    //
-    //     outPutArray.push(tournament);
-    //     console.log(key);
-    // }
+    collection.insert(
+        item.tournament,
 
-    // console.log(formattedData);
+        function(err, result) {
+            assert.equal(err, null);
+            assert.equal(1, result.result.n);
+            assert.equal(1, result.ops.length);
+            console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
+        });
+}));
 
-    return data;
-}
+
 
 stats.populateDatabase = function(data) {
 
-}
+};
 
 
 
@@ -83,32 +74,21 @@ module.exports = stats;
 
 
 
-
-
-
-
-
-
-
-
-
 /*--------------CODE GRAVEYARD--------------*/
-
+//
 // rip
-
-
+//
+//
 // challongeApi.showTournament('smasheville' + i, function(data) {
 //     console.log(data.tournament.name);
 //     result[data.tournament.name] = data;
 // });
-
-
+//
 // if (data.tournament.name == 'SmAsheville' + lastTournament) {
 //     console.log(Object.keys(result));
 //     callback(result);
 // }
-
-
+//
 // var tournamentPromise = new Promise(function(resolve, reject) {
 //
 //   if (/* everything turned out fine */) {
@@ -118,3 +98,27 @@ module.exports = stats;
 //     reject(Error("It broke"));
 //   }
 // });
+//
+// Fix challonge's awkward formatting
+// TODO: FIX THIS HORRIBLE MONSTER
+// function formatData(data) {
+//
+//     var formattedData = {};
+//
+//     data.forEach(function (item) {
+//         item. = item.tournament;
+//     });
+//
+//     for (var key in formattedData) {
+//         if (!formattedData.hasOwnProperty(key)) continue;
+//
+//         var tournament = formattedData[key];
+//
+//         outPutArray.push(tournament);
+//         console.log(key);
+//     }
+//
+//     console.log(formattedData);
+//
+//     return data;
+// }

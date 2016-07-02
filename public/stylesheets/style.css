@@ -1,8 +1,127 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0a001a;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.main {
+    max-width: 400px;
+    background-color: #140033;
+    background-position: center center;
+    padding: 0;
+    margin: 8px auto 8px auto;
+    text-align: center;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 26px;
+    font-family: 'Oswald', sans-serif;
+    margin: 2px;
+    padding: 0;
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    margin: 2px;
+    padding: 0;
+}
+
+.my-handle {
+    cursor: move;
+    cursor: -webkit-grabbing;
+}
+
+h2.item {
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.header {
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+div.item {
+    width: 90%;
+    height: 30px;
+    margin: 2px auto 2px auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: left;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.sortable-ghost {
+    background-color: rgb(111, 111, 111);
+    background-color: rgba(111, 111, 111, 0.6);
+}
+
+.line {
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    height: 4px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text {
+    width: 90%;
+    height: 50px;
+    margin: 2px auto 2px auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 8px;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.pulldown {
+    width: 90%;
+    height: 50px;
+    margin: 2px auto 2px auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 8px;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.button {
+    width: 300px;
+    height: 50px;
+    margin: 10px auto 10px auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 8px;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.breaker {
+    padding: 0;
+    width: 80%;
+    height: 4px;
+    margin: 8px auto 8px auto;
 }

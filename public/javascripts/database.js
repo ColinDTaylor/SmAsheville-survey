@@ -1,23 +1,25 @@
 var challongeApi = require('./api-basics.js');
-var MongoClient = require('mongodb').MongoClient
-  , assert = require('assert');
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
 
 
 // Connection URL
-var url = 'mongodb://localhost:27017/challongeApiTest';
+// var url = 'mongodb://localhost:27017/SmAsheville';
 
 var database = {};
 var dbObj = {};
 
 
 // TODO: make this less awkward
-database.connect = function() {
+database.connect = function(dbName) {
 
     // Use connect method to connect to the server
 
+    var url = 'mongodb://localhost:27017/' + dbName;
+
     var dbObj = new Promise(function (resolve, reject) {
         MongoClient.connect(url, function(err, db) {
-          //assert.equal(null, err);
+          assert.equal(null, err);
           if (err){
             console.log('SOMTHING WENT SOUTH');
             reject();
@@ -27,14 +29,14 @@ database.connect = function() {
     });
 
     return dbObj.then(function (db) {
-        return db
+        return db;
     });
-}
+};
 
 database.close = function() {
     dbObj.close();
     console.log("Disconnected succesfully from server");
-}
+};
 
 database.insert = function(db, col, newDoc, callback) {
 
@@ -52,7 +54,7 @@ database.insert = function(db, col, newDoc, callback) {
             callback();
     });
 
-}
+};
 
 module.exports = database;
 

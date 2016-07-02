@@ -8,18 +8,20 @@ var assert = require('assert');
 /* GET stats listing */
 router.get('/', function(req, res, next) {
 
+    //TODO: make this monster its own function in stat-functions
     stats.getTournaments(60, 72).then(function(data) {
 
         console.log('succesfully got data');
 
-        database.connect().then(function (db) {
-            console.log('whats up I connected nice');
+        database.connect('SmAsheville').then(function (db) {
+            console.log('connected to mongoDB');
 
-            var collection = db.collection('toot');
+            var collection = db.collection('tournaments');
             var promiseArray = [];
 
             for (var item of data) {
 
+                // TODO: make this separate from the loop
                 promiseArray.push(new Promise (function (resolve, reject) {
 
                     collection.insert(
@@ -29,17 +31,14 @@ router.get('/', function(req, res, next) {
                             assert.equal(err, null);
                             assert.equal(1, result.result.n);
                             assert.equal(1, result.ops.length);
-                            resolve();
-                    });
+                            console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
+                        });
                 }));
-
-                console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
-
             }
 
             Promise.all(promiseArray).then(function () {
                 console.log('all inserts done, closing...');
-                db.close()
+                db.close();
                 console.log('closed');
             });
 
@@ -63,42 +62,65 @@ module.exports = router;
 
 
 
-/*--------------CODE GRAVEYARD--------------*/
-
-// rip
-
-// console.log(tournamentArray);
-
-// setTimeout(function () {
+// /*--------------CODE GRAVEYARD--------------*/
 //
-//         },  2000);
-
-// res.send("ssssssI");
-
-// for (var key in data) {
-//     if (!data.hasOwnProperty(key)) continue;
+//     // rip
 //
-//     var tournament = data[key];
-// }
-
-// This should get the data from challonge, then generate an array of promises
-// which are there to push the data to the database when it is ready.
-
-// Promise.all(promiseArray).then(function() {
-//     console.log('test');
-//     database.close();
-// });
-
-// var buut = butt(tEST);
-
-// function butt(ho) {
-//     return ho;
-// }
-
-//res.send(console.log("I got nuffin"));
-//console.log(tEST);
-
-
-// data.forEach(function (item) {
-//     console.log(item); // FIX: this doesn't work because of the unecessary containing object
-// });
+//     // console.log(tournamentArray);
+//
+//     // setTimeout(function () {
+//     //
+//     //         },  2000);
+//
+//     // res.send("ssssssI");
+//
+//     // for (var key in data) {
+//     //     if (!data.hasOwnProperty(key)) continue;
+//     //
+//     //     var tournament = data[key];
+//     // }
+//
+//     // This should get the data from challonge, then generate an array of promises
+//     // which are there to push the data to the database when it is ready.
+//
+//     // Promise.all(promiseArray).then(function() {
+//     //     console.log('test');
+//     //     database.close();
+//     // });
+//
+//     // var buut = butt(tEST);
+//
+//     // function butt(ho) {
+//     //     return ho;
+//     // }
+//
+//     //res.send(console.log("I got nuffin"));
+//     //console.log(tEST);
+//
+//
+//     // data.forEach(function (item) {
+//     //     console.log(item); // FIX: this doesn't work because of the unecessary containing object
+//     // });
+//
+//     //
+//     //         Stop the app from crashing upon trying to insert a doc that already exists
+//     //
+//     //         TODO: fix this graceful error handler so it can be used.
+//     //
+//     //         if (err) {
+//     //             if (err.name === 'MongoError' && err.code === 11000) {
+//     //                 // Duplicate record found
+//     //                 console.log("***** collection '" +
+//     //                             collection.s.name +
+//     //                             "' already has a document with the ID '" +
+//     //                             item.tournament._id + "', skipping... *****");
+//     //                 reject();
+//     //             } else {
+//     //                 // Some other error
+//     //                 return res.status(500).send(err);
+//     //             }
+//     //         } else {
+//     //             console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
+//     //         }
+//     // //
+//     // //         resolve();
