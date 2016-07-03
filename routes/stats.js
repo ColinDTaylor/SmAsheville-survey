@@ -2,17 +2,24 @@ var express = require('express');
 var router = express.Router();
 var database = require('../public/javascripts/database.js');
 var challongeApi = require('../public/javascripts/api-basics.js');
-var stats = require('../public/javascripts/stat-functions.js');
+var stats = require('../public/javascripts/api-get.js');
 var assert = require('assert');
 
 /* GET stats listing */
 router.get('/', function(req, res, next) {
 
-    stats.getTournaments(60, 72).then(function(data) {
+    // stats.getTournaments(60, 72).then(function(data) {
+    //
+    //     console.log('succesfully got data from challonge');
+    //
+    //     database.populate(data, "hhftrst", "tournament");
+    // });
 
-        console.log('succesfully got data from challonge');
+    stats.getParticipants(60, 72).then(function(data) {
 
-        database.populateTournaments(data, "lastoftoaday");
+        console.log('succesfully got participant data from challonge');
+
+        database.populate(data, "participants", "participants");
     });
 
     res.send("stats r 4 nedrs");

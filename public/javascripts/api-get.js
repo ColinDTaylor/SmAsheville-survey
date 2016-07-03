@@ -40,12 +40,53 @@ stats.getTournaments = function(firstTournament, lastTournament) {
 //         });
 // }));
 
+stats.getParticipants = function(firstTournament, lastTournament) {
 
+    var promiseArray = [];
 
-stats.populateDatabase = function(data) {
+    if (lastTournament - firstTournament > 100) {
+        console.log("Heck no that's too many participants");
+        return result;
+    }
 
+    for (var i = firstTournament; i <= lastTournament; i++) {
+        promiseArray.push(challongeApi.indexParticipants('smasheville' + i));
+    }
+
+    return Promise.all(promiseArray).then(function(data) {
+
+        // console.log(data);
+        // this add an _id field that is equal to the weekly's number (for mongo)
+        // for (var item of data) {
+        //     item.tournament._id = item.tournament.name.substring(11, 13);
+        // }
+        return data;
+    });
 };
 
+stats.getMatches = function(firstTournament, lastTournament) {
+
+    var promiseArray = [];
+
+    if (lastTournament - firstTournament > 100) {
+        console.log("Heck no that's too many tournaments");
+        return result;
+    }
+
+    for (var i = firstTournament; i <= lastTournament; i++) {
+        promiseArray.push(challongeApi.showTournament('smasheville' + i));
+    }
+
+    return Promise.all(promiseArray).then(function(data) {
+
+        // this add an _id field that is equal to the weekly's number (for mongo)
+        for (var item of data) {
+            // item.tournament._id = item.tournament.name.substring(11, 13);
+        }
+
+        return data;
+    });
+};
 
 
 // tournamentArray = stats.getTournaments(60, 72).then(function(data) {
@@ -161,7 +202,7 @@ module.exports = stats;
 //     callback(result);
 // }
 //
-// var tournamentPromise = new Promise(function(resolve, reject) {
+// var insertionPromise = new Promise(function(resolve, reject) {
 //
 //   if (/* everything turned out fine */) {
 //     resolve("Stuff worked!");

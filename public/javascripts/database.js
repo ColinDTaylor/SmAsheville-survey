@@ -40,19 +40,40 @@ database.close = function() {
     console.log("Disconnected succesfully from server");
 };
 
-
-database.populateTournaments = function(data, col) {
-    database.connect('SmAsheville').then(function (db) {
+// TODO: this should PROBABLY use insertMany instead, if possible
+database.populate = function(data, col, type) { // data = challonge data, col = collection
+    database.connect('SmAsheville').then(function (db) {   // type = string for type of data: "tournament", "participant", or "match"
         console.log('connected to mongoDB');
 
         var collection = db.collection(col);
         var promiseArray = [];
 
-        for (var item of data) {
-            promiseArray.push(tournamentPromise(item.tournament, collection));
+        // TODO: make this convert the tournamentId into a real tournament name
+        // TODO: seriously wtf man
+        for (var tournament of data) {
+            switch (type) {
+                case "participants":
+                    for (var player of tournament) {
+                        if (player.participant.tournamentId != prevId) {
+                            console.log("inserting participants for tournamentId " + player.participant.tournamentId + "...");
+                        }
+                        promiseArray.push(insertionPromise(player, collection));
+                        var prevId = player.participant.tournamentId;
+                    }
+                    break;
+
+                case "tournaments":
+                    console.log("inserting " + tournament.tournament.tournamentId + "...");
+                    promiseArray.push(insertionPromise(tournament[type], collection));
+                    break;
+
+                case "matches":
+                    console.log("match data not supported yet");
+                    break;
+            }
         }
 
-        console.log(promiseArray);
+        // console.log(promiseArray);
 
         Promise.all(promiseArray).then(function () {
             console.log('all inserts done, closing...');
@@ -62,7 +83,7 @@ database.populateTournaments = function(data, col) {
     });
 };
 // helper function to keep from creating a function inside of a loop
-function tournamentPromise(document, collection) {
+function insertionPromise(document, collection) {
     return new Promise(function(resolve, reject) {
 
         collection.insert(
@@ -78,14 +99,14 @@ function tournamentPromise(document, collection) {
 
     });
 }
-
-database.populateParticipants = function (data, col) {
-
-};
-
-database.populateMatches = function (data, col) {
-
-};
+//
+// database.populateParticipants = function (data, col) {
+//
+// };
+//
+// database.populateMatches = function (data, col) {
+//
+// };
 
 module.exports = database;
 
