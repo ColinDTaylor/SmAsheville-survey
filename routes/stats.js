@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
         console.log('succesfully got participant data from challonge');
 
-        database.populate(data, "participants", "participants");
+        database.populate(data, "zzzzzz", "participants");
     });
 
     res.send("stats r 4 nedrs");

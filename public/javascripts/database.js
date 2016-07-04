@@ -50,6 +50,7 @@ database.populate = function(data, col, type) { // data = challonge data, col = 
 
         // TODO: make this convert the tournamentId into a real tournament name
         // TODO: seriously wtf man
+        var prevId;
         for (var tournament of data) {
             switch (type) {
                 case "participants":
@@ -57,18 +58,26 @@ database.populate = function(data, col, type) { // data = challonge data, col = 
                         if (player.participant.tournamentId != prevId) {
                             console.log("inserting participants for tournamentId " + player.participant.tournamentId + "...");
                         }
-                        promiseArray.push(insertionPromise(player, collection));
-                        var prevId = player.participant.tournamentId;
+                        promiseArray.push(insertionPromise(player.participant, collection, type));
+                        prevId = player.participant.tournamentId;
                     }
                     break;
 
+                    // TODO: test this
                 case "tournaments":
-                    console.log("inserting " + tournament.tournament.tournamentId + "...");
-                    promiseArray.push(insertionPromise(tournament[type], collection));
+                    console.log("inserting " + tournament.tournament.name + "...");
+                    promiseArray.push(insertionPromise(tournament.tournament, collection, type));
                     break;
 
+                    // TODO: add match data
                 case "matches":
-                    console.log("match data not supported yet");
+                    for (var match of tournament) {
+                        if (player.match.tournamentId != prevId) {
+                            console.log("inserting matches for tournamentId " + player.match.tournamentId + "...");
+                        }
+                        promiseArray.push(insertionPromise(player, collection, type));
+                        prevId = player.match.tournamentId;
+                    }
                     break;
             }
         }
@@ -83,7 +92,8 @@ database.populate = function(data, col, type) { // data = challonge data, col = 
     });
 };
 // helper function to keep from creating a function inside of a loop
-function insertionPromise(document, collection) {
+// TODO: make the log printed here work universally
+function insertionPromise(document, collection, type) {
     return new Promise(function(resolve, reject) {
 
         collection.insert(
@@ -92,21 +102,25 @@ function insertionPromise(document, collection) {
                 assert.equal(err, null);
                 assert.equal(1, result.result.n);
                 assert.equal(1, result.ops.length);
-                console.log("Inserting " + document.name + " into '" + collection.s.name + "'");
+                switch (type) {
+                    case "tournaments":
+                        console.log("Inserting " + document.tournament.name + " into '" + collection.s.name + "'");
+                        break;
+                    case "participants":
+                        // console.log("Inserting " + document.participant.name + " into '" + collection.s.name + "'");
+                        break;
+                    case "matches":
+                        // console.log("Inserting " + document.match.tournamentId + " into '" + collection.s.name + "'");
+                        break;
+                    default:
+
+                }
                 resolve(result);
             }
         );
 
     });
 }
-//
-// database.populateParticipants = function (data, col) {
-//
-// };
-//
-// database.populateMatches = function (data, col) {
-//
-// };
 
 module.exports = database;
 
