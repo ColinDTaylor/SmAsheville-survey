@@ -8,21 +8,29 @@ var assert = require('assert');
 /* GET stats listing */
 router.get('/', function(req, res, next) {
 
-    // stats.getTournaments(60, 72).then(function(data) {
-    //
-    //     console.log('succesfully got data from challonge');
-    //
-    //     database.populate(data, "hhftrst", "tournament");
-    // });
+    stats.getTournaments(60, 72).then(function(data) {
+
+        console.log('succesfully got data from challonge');
+
+        database.populate(data, "spring_2016.tounaments", "tournaments");
+    });
 
     stats.getParticipants(60, 72).then(function(data) {
 
         console.log('succesfully got participant data from challonge');
 
-        database.populate(data, "zzzzzz", "participants");
+        database.populate(data, "spring_2016.participants", "participants");
     });
 
-    res.send("stats r 4 nedrs");
+    res.send("stats r 4 nerds");
+    // database.connect("SmAsheville").then(function(db) {
+    //     // res.send("stats r 4 nedrs");
+    //
+    //     col = db.collection("raw_participants");
+    //     var docs = col.find({name: 'Absolome'}, {}).limit(10);
+    //
+    //     console.log(docs);
+    // });
 });
 
 module.exports = router;

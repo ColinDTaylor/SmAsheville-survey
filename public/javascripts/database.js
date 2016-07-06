@@ -35,8 +35,8 @@ database.connect = function(dbName) {
 };
 
 // TODO: update these database functions to not be terrible
-database.close = function() {
-    dbObj.close();
+database.close = function(db) {
+    db.close();
     console.log("Disconnected succesfully from server");
 };
 
@@ -49,6 +49,7 @@ database.populate = function(data, col, type) { // data = challonge data, col = 
         var promiseArray = [];
 
         // TODO: make this convert the tournamentId into a real tournament name
+
         // TODO: seriously wtf man
         var prevId;
         for (var tournament of data) {
@@ -104,7 +105,7 @@ function insertionPromise(document, collection, type) {
                 assert.equal(1, result.ops.length);
                 switch (type) {
                     case "tournaments":
-                        console.log("Inserting " + document.tournament.name + " into '" + collection.s.name + "'");
+                        console.log("Inserting " + document.name + " into '" + collection.s.name + "'");
                         break;
                     case "participants":
                         // console.log("Inserting " + document.participant.name + " into '" + collection.s.name + "'");
@@ -121,6 +122,25 @@ function insertionPromise(document, collection, type) {
 
     });
 }
+
+// The idea behind this is to take an array of tags and iterate them all through some horrible massive switch statement
+// There has GOT to be a better way.
+database.aliasResolver = function(tags){
+
+};
+
+database.cleanTournamentData = function(data) {
+
+};
+
+database.cleanParticipantData = function(data) {
+
+};
+
+database.cleanMatchData = function(data) {
+    //Unused for now
+};
+
 
 module.exports = database;
 

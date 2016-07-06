@@ -1,0 +1,23 @@
+MODULES
+
+api-basics
+    - creates wrappers which easily turn API calls into promises
+
+api-get
+    - includes methods which iterate through many get calls to grab all smashevilles in a range
+    # TODO: make this more universal, right now it can only work for SmAsheville
+    # TODO: clean this module jesus christ
+
+database
+    - includes methods used to access the database. the massive insert function should probably be
+    taken out back and shot, honestly.
+
+Sortable
+    - 3rd party, only non-min'd to reference if need be
+
+survey
+    - includes back end code to use with the survey. Nothing is here yet.
+
+pr-data
+    - includes methods for use with the data. Anything that manipulates the tournament data to
+    help generate a PR should go here.
