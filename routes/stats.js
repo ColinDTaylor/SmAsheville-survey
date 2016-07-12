@@ -11,37 +11,9 @@ var prData = require('../public/javascripts/pr-data.js');
 /* GET stats listing */
 router.get('/', function(req, res, next) {
 
-    // stats.getTournaments(60, 72).then(function(data) {
-    //
-    //     console.log('succesfully got data from challonge');
-    //
-    //     database.populate(data, "spring_2016.tounaments", "tournaments");
-    // });
-    //
-    // stats.getParticipants(60, 72).then(function(data) {
-    //
-    //     console.log('succesfully got participant data from challonge');
-    //
-    //     database.populate(data, "spring_2016.participants", "participants");
-    // });
-
-    // var avagadro = aliases.lookupAlias("Avagadro");
-
-    // queries.getSeasonalTop8s('spring_2016').then(result => {
-    //     console.log(result);
-    // });
-
-    prData.attendance();
+    prData.generateEligibility('spring_2016');
 
     res.send("stats r 4 nerds");
-    // database.connect("SmAsheville").then(function(db) {
-    //     // res.send("stats r 4 nedrs");
-    //
-    //     col = db.collection("raw_participants");
-    //     var docs = col.find({name: 'Absolome'}, {}).limit(10);
-    //
-    //     console.log(docs);
-    // });
 });
 
 module.exports = router;
@@ -127,3 +99,30 @@ module.exports = router;
 //             console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
 //         });
 // }));
+// database.connect("SmAsheville").then(function(db) {
+//     // res.send("stats r 4 nedrs");
+//
+//     col = db.collection("raw_participants");
+//     var docs = col.find({name: 'Absolome'}, {}).limit(10);
+//
+//     console.log(docs);
+// });
+// stats.getTournaments(60, 72).then(function(data) {
+//
+//     console.log('succesfully got data from challonge');
+//
+//     database.populate(data, "spring_2016.tounaments", "tournaments");
+// });
+//
+// stats.getParticipants(60, 72).then(function(data) {
+//
+//     console.log('succesfully got participant data from challonge');
+//
+//     database.populate(data, "spring_2016.participants", "participants");
+// });
+
+// var avagadro = aliases.lookupAlias("Avagadro");
+
+// queries.getSeasonalTop8s('spring_2016').then(result => {
+//     console.log(result);
+// });

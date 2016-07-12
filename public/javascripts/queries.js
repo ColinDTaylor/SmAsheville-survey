@@ -1,5 +1,5 @@
 var database = require('./database.js');
-
+var aliasHandler = require('./alias-handler.js');
 // This file is here to contain all functions that query the existing database for certain datasets
 
 var Queries = {};
@@ -20,7 +20,16 @@ Queries.getSeasonalTop8s = function(season) {
             return p_collection.distinct('name', {finalRank: {$lt: 8},
                                            tournamentId: {$nin: smallTournaments}});
         }).then(docs => {
-            return docs;
+            let outputArray = [];
+            for (let player of docs) {
+                let cleanedAlias = aliasHandler.lookupAlias(player);
+
+                if (!outputArray.includes(cleanedAlias)) {
+
+                    outputArray.push(cleanedAlias);
+                }
+            }
+            return outputArray;
         });
     });
 };

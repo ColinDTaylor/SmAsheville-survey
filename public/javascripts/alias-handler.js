@@ -286,15 +286,14 @@ Aliases.bigList = {
 };
 
 
-
+// TODO: fix all this case crap so that I don't need the patch on Object
 Aliases.lookupAlias = function(tagToFind, addIfNotFound = false, entryNumParam = 0) {
 
-    console.log(`Searching for ${tagToFind}...`);
-
+    // console.log(`Searching for ${tagToFind}...`);
     // Check if the searched tag is on the outer level of the list.
     if (Aliases.bigList.hasOwnProperty(tagToFind)) {
 
-        console.log(`${tagToFind} found in database.`);
+        // console.log(`${tagToFind} found in database.`);
         var playerObj = Aliases.bigList[tagToFind];
 
         // if this player object has no usual tag yet, set it to be the object's name.
@@ -302,7 +301,6 @@ Aliases.lookupAlias = function(tagToFind, addIfNotFound = false, entryNumParam =
         if (!playerObj.usualTag) {
             playerObj.usualTag = tagToFind;
         }
-
         // return with our found name.
         // TODO: make this correct capitalization to use the one from the list.
         return tagToFind;
@@ -310,14 +308,17 @@ Aliases.lookupAlias = function(tagToFind, addIfNotFound = false, entryNumParam =
 
     // Check each embedded player object's properties, if an alias is found return the usual tag.
     for (var player in Aliases.bigList) {
+        if (player.toLowerCase() === tagToFind.toLowerCase) {
+            // console.log(`${tagToFind} found in database under a different capitalization.`);
+            return tagToFind;
+        }
         // console.log(`checking ${player}`);
         let playerObj = Aliases.bigList[player];
 
-        if (playerObj.hasOwnProperty(tagToFind)) {
-
+        if (hasOwnPropertyCI(playerObj, tagToFind)) {
             // if there is no usual tag, return the object's name (they should be identical anyways)
-            let trueName = playerObj.hasOwnProperty("usualTag") ? playerObj[usualTag] : player;
-            console.log(`${tagToFind} found as alias for ${trueName}`);
+            let trueName = playerObj.hasOwnProperty("usualTag") ? playerObj.usualTag : player;
+            // console.log(`${tagToFind} found as alias for ${trueName}`);
             return trueName;
         }
     }
@@ -333,7 +334,24 @@ Aliases.lookupAlias = function(tagToFind, addIfNotFound = false, entryNumParam =
 
     // Tag not found anywhere
     console.log(`'${tagToFind}' not found in database.`);
-    return 0;
+    throw Error('nooooo');
+};
+
+// This function finds every non-standard alias in an array of tags and converts it to standard
+// if the standard is already in the array, the alias is removed. This means the array may come out
+// smaller than it was going in.
+Aliases.cleanAliasesInArray = function(inputArray) {
+    for (let tag of inputarray) {
+        console.log(tag);
+    }
 };
 
 module.exports = Aliases;
+
+// Tiny helper to give me a case insensitive version of hasOwnProperty
+hasOwnPropertyCI = function(obj, prop) {
+   return Object.keys(obj)
+          .filter(function (v) {
+             return v.toLowerCase() === prop.toLowerCase();
+           }).length > 0;
+};
