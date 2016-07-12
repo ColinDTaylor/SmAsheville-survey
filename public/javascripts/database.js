@@ -29,9 +29,11 @@ database.connect = function(dbName) {
         });
     });
 
-    return dbObj.then(function (db) {
-        return db;
-    });
+    // return dbObj.then(function (db) {
+    //     return db;
+    // });
+
+    return dbObj;
 };
 
 // TODO: update these database functions to not be terrible
@@ -125,9 +127,6 @@ function insertionPromise(document, collection, type) {
 
 // The idea behind this is to take an array of tags and iterate them all through some horrible massive switch statement
 // There has GOT to be a better way.
-database.aliasResolver = function(tags){
-
-};
 
 database.cleanTournamentData = function(data) {
 

@@ -1,26 +1,37 @@
 var express = require('express');
+var assert = require('assert');
 var router = express.Router();
 var database = require('../public/javascripts/database.js');
 var challongeApi = require('../public/javascripts/api-basics.js');
 var stats = require('../public/javascripts/api-get.js');
-var assert = require('assert');
+var aliases = require('../public/javascripts/alias-handler.js');
+var queries = require('../public/javascripts/queries.js');
+var prData = require('../public/javascripts/pr-data.js');
 
 /* GET stats listing */
 router.get('/', function(req, res, next) {
 
-    stats.getTournaments(60, 72).then(function(data) {
+    // stats.getTournaments(60, 72).then(function(data) {
+    //
+    //     console.log('succesfully got data from challonge');
+    //
+    //     database.populate(data, "spring_2016.tounaments", "tournaments");
+    // });
+    //
+    // stats.getParticipants(60, 72).then(function(data) {
+    //
+    //     console.log('succesfully got participant data from challonge');
+    //
+    //     database.populate(data, "spring_2016.participants", "participants");
+    // });
 
-        console.log('succesfully got data from challonge');
+    // var avagadro = aliases.lookupAlias("Avagadro");
 
-        database.populate(data, "spring_2016.tounaments", "tournaments");
-    });
+    // queries.getSeasonalTop8s('spring_2016').then(result => {
+    //     console.log(result);
+    // });
 
-    stats.getParticipants(60, 72).then(function(data) {
-
-        console.log('succesfully got participant data from challonge');
-
-        database.populate(data, "spring_2016.participants", "participants");
-    });
+    prData.attendance();
 
     res.send("stats r 4 nerds");
     // database.connect("SmAsheville").then(function(db) {
@@ -34,22 +45,6 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
-
-
-// promiseArray.push(new Promise (function (resolve, reject) {
-//
-//     collection.insert(
-//         item.tournament,
-//
-//         function(err, result) {
-//             assert.equal(err, null);
-//             assert.equal(1, result.result.n);
-//             assert.equal(1, result.ops.length);
-//             console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
-//         });
-// }));
-
-
 
 
 
@@ -120,3 +115,15 @@ module.exports = router;
 //     //         }
 //     // //
 //     // //         resolve();
+// promiseArray.push(new Promise (function (resolve, reject) {
+//
+//     collection.insert(
+//         item.tournament,
+//
+//         function(err, result) {
+//             assert.equal(err, null);
+//             assert.equal(1, result.result.n);
+//             assert.equal(1, result.ops.length);
+//             console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
+//         });
+// }));
