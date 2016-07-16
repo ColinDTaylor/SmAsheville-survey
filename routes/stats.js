@@ -11,9 +11,10 @@ var prData = require('../public/javascripts/pr-data.js');
 /* GET stats listing */
 router.get('/', function(req, res, next) {
 
-    prData.generateEligibility('spring_2016');
+    prData.generateEligibility('spring_2016').then(eligiblePlayers => {
+        res.send(eligiblePlayers);
+    });
 
-    res.send("stats r 4 nerds");
 });
 
 module.exports = router;

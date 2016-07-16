@@ -38,20 +38,22 @@ PrData.attendance = function() {
     let outputArray = [];
     let playerIndex = 0;
 
-    console.log(aliasHandler.bigList);
-
     // use the big list to add all of the alias uses together to get one attendance number
     for (let player in aliasHandler.bigList) {
         outputArray[playerIndex] = [player, 0];
         for (let alias in aliasHandler.bigList[player]) {
 
+            // TODO: make this bugfix unecessary, a "player" class should do the trick
+            if (alias == 'usualTag') {
+                continue;
+            }
             // console.log(aliasHandler.bigList[player][alias]);
             outputArray[playerIndex][1] += aliasHandler.bigList[player][alias];
         }
         playerIndex++;
     }
 
-    console.log(outputArray);
+    // console.log(outputArray);
 
     // sort the player arrays by attendance, highest to lowest.
     outputArray.sort((a, b) => {
@@ -65,7 +67,7 @@ PrData.attendance = function() {
         return 0;
     });
 
-    // console.log(output);
+    // console.log(outputArray);
     return outputArray;
 };
 
@@ -76,14 +78,17 @@ PrData.generateEligibility = function(season) {
     let missingTop8 = [];
     let eligible = [];
 
-    // generate attendance list for playeds with 3 or more tournament entries
-    for (let participant of attendance) {
-        if (participant[1] >= 3) {
-            eligibleAttendance.push(participant[0]);
+    // generate attendance list for players with 3 or more tournament entries
+    return queries.getSeasonalTop8s(season).then(top8s => {
+        let indexp = 0;
+        for (let participant of attendance) {
+            // console.log(participant);
+            if (participant[1] >= 3) {
+                indexp++;
+                // console.log(indexp);
+                eligibleAttendance.push(participant[0]);
+            }
         }
-    }
-
-    let gotTop8 = queries.getSeasonalTop8s(season).then(top8s => {
 
         for (let participant of eligibleAttendance) {
 
@@ -93,9 +98,10 @@ PrData.generateEligibility = function(season) {
                 missingTop8.push(participant);
             }
         }
-        // console.log(top8s);
-        // console.log(eligibleAttendance);
-        console.log(eligible);
+        // console.log(top8s.length);
+        // console.log(eligibleAttendance.length);
+        // console.log(attendance.length);
+        // console.log(eligible.length);
         return eligible;
     });
 };

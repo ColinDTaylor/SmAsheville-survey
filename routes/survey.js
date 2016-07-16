@@ -5,7 +5,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('survey');
+  res.render('survey', {
+      stylesheet : "stylesheets/survey-styles.css",
+      title  :   "Zhwang!"
+  });
 });
 
 module.exports = router;

@@ -3,10 +3,8 @@
 
 <!-- TODO: handelbarsify this -->
 <head>
-    <title>SmAsheville PR</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
-    <script src="sortable/Sortable.js"></script>
+    <link rel="stylesheet" href="../public/stylesheets/survey-styles.css">
 </head>
 
 <body>
@@ -15,24 +13,33 @@
         <div class="breaker"></div>
         <div class="line"></div>
         <h1>SmAsheville PR</h1>
-        <h2>Ballot for the 2016 Summer Season</h2>
+        <h2>Ballot for the 2016 Spring Season</h2>
         <div class="line"></div>
-        <h2 class="header">Your Tag<br><span style="font-size:10px">to prevent duplicate votes</span></h2>
-        <input type="text" class="text" id="tag">
-        <h2 class="header">Main Votes<br><span style="font-size:10px">the mandatory part of the ballot</span></h2>
+        
+        <div class="tag-q-wrapper">
+            <p class="yourtag">Your Tag:</p>
+            <input type="text" class="text" id="tag">       
+        </div>
+        
+        <h2 class="header">Main Votes<br></h2>
+        
+        <!-- TODO: remove this inline style -->
         <h2 class="item">Players<br><span style="font-size:10px">place players ranked in order from best to worst here</span></h2>
+        
         <div class="list" id="players">
             <h2 id="placeholder" class="item">N/A<br><span style="font-size:10px">place players you don't know well enough to vote for under here</span></h2>
         </div>
-        <h2 class="header">Superlative Awards<br><span style="font-size:10px">why we're REALLY voting</span></h2>
-        <h2 class="item">Who had the best something or other words and stuff?<br><span style="font-size:10px">pick who you feel fits best</span></h2>
+        
+        
+        <h2 class="header">Additional Awards<br><span style="font-size:10px">why we're REALLY voting</span></h2>
+        <h2 class="item">Who had the best something or other words and stuff?<br><span style="font-size:10px">{{question_1}}</span></h2>
         <select class="pulldown" name="stuffs">
             <option>person1</option>
             <option>person2</option>
             <option>person3</option>
             <option>person4</option>
         </select>
-        <h2 class="item">What was the best wow ok amazing ^O^<br><span style="font-size:10px">pick who you feel fits best</span></h2>
+        <h2 class="item"><br>{{question_2}}</h2>
         <select class="pulldown" name="wowok">
             <option>person1</option>
             <option>person2</option>
@@ -42,8 +49,7 @@
         <div class="breaker"></div>
         <div class="breaker"></div>
         <div class="line"></div>
-        <h1>Cast Your Votes</h1>
-        <button type="button" class="button" onclick="tally()">Click Me!</button>
+        <button type="button" class="button" onclick="tally()">Submit</button>
         <div class="line"></div>
         <div class="breaker"></div>
         <div class="breaker"></div>
@@ -53,5 +59,6 @@
         <div class="breaker"></div>
     </div>
 </body>
-
-</html>
+   <script src="javascripts/Sortable.js">
+    </script>
+    <script src="javascripts/survey.js"></script>

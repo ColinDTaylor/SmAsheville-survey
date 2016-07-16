@@ -9,13 +9,10 @@ var assert = require('assert');
 var database = {};
 var dbObj = {};
 
-
+// Use connect method to connect to the server
 // TODO: make this less awkward
 // TODO: change this to allow for future non-smasheville users
 database.connect = function(dbName) {
-
-    // Use connect method to connect to the server
-
     var url = 'mongodb://localhost:27017/' + dbName;
 
     var dbObj = new Promise(function (resolve, reject) {
@@ -28,10 +25,6 @@ database.connect = function(dbName) {
           resolve(db);
         });
     });
-
-    // return dbObj.then(function (db) {
-    //     return db;
-    // });
 
     return dbObj;
 };

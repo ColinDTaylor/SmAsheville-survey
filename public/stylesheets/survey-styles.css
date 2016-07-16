@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+    color: #2a3744;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -8,8 +13,9 @@ body {
 }
 
 .main {
-    max-width: 400px;
-    /*background-color: #140033;*/
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
     background-color: rgb(171, 204, 255);
     background-position: center center;
     padding: 0;
@@ -34,19 +40,35 @@ h2 {
 }
 
 .my-handle {
+/*
     cursor: move;
     cursor: -webkit-grabbing;
+*/
 }
 
 h2.item {
     /*background-color: rgb(0, 0, 0);*/
     /*background-color: rgba(0, 0, 0, 0.85);*/
+    width: 100%;    
     background-color: #fefefe;
     padding: 6px;
     padding-top: 8px;
     padding-bottom: 8px;
     margin-top: 6px;
     margin-bottom: 6px;
+    
+    
+}
+
+.headertag {
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: .5em;
+/*    margin-bottom: 1em;*/
+    width: 20%;
+    display: inline-block;
+    float: right;
 }
 
 .header {
@@ -61,11 +83,13 @@ div.item {
     width: 90%;
     height: 30px;
     margin: 2px auto 2px auto;
+    background-color: #fefefe;
     /*background-color: rgb(0, 0, 0);*/
     /*background-color: rgba(0, 0, 0, 0.6);*/
     text-align: left;
-    padding: 8px;
+    padding-left: 8px;
     font-size: 20px;
+    cursor: move;
 }
 
 .sortable-ghost {
@@ -78,22 +102,20 @@ div.item {
     padding: 0;
     width: 80%;
     height: 4px;
-    background-color: white;
+    background-color: #fefefe;
     margin-left: auto;
     margin-right: auto;
 }
 
 .text {
-    width: 90%;
-    height: 50px;
-    margin: 2px auto 2px auto;
-    /*background-color: rgb(0, 0, 0);*/
-    /*background-color: rgba(0, 0, 0, 0.6);*/
+    background-color: #fefefe;
+    display: inline;
+    border-radius: .1em;
+    width: 40%;
+    margin: .5em auto .5em auto;
     text-align: center;
-    /*padding: 8px;*/
-    /*color: white;*/
     border: none;
-    font-size: 20px;
+    font-size: 1rem;
 }
 
 .pulldown {
@@ -113,6 +135,7 @@ div.item {
     width: 300px;
     height: 50px;
     margin: 10px auto 10px auto;
+    background-color: #fefefe;
     /*background-color: rgb(0, 0, 0);*/
     /*background-color: rgba(0, 0, 0, 0.6);*/
     text-align: center;
@@ -127,4 +150,25 @@ div.item {
     width: 80%;
     height: 4px;
     margin: 8px auto 8px auto;
+}
+
+.short-text-q {
+    display: inline-block;
+    margin: auto;
+    width: 60% 
+}
+
+.tag-q-wrapper {
+    display: block;
+    height: 3rem;
+}
+
+.yourtag {
+    width: 5rem;
+    margin-left: 1rem;
+    display: inline-block
+}
+
+.list_player {
+    cursor: move;
 }

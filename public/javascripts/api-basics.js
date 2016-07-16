@@ -2,7 +2,7 @@ var challonge = require('challonge');
 //var database = require('./database');
 
 var client = challonge.createClient({
-    apiKey: 'hvA3eLb7hzOGS5py3PM3ZaGJAlRHTACaktnlobkQ'
+    apiKey: 'lololoollolololoololooloo'
 });
 
 var challongeApi = {};

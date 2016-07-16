@@ -11,10 +11,11 @@ window.onload = function() {
         "player4",
         "player5"
     ];
+    // TODO: replace this with a handlebars template
     for (var i = 0; i < players.length; i++) {
         var new_player = document.createElement("div");
         new_player.className = "item";
-        new_player.innerHTML = "<span class=\"my-handle\">&nbsp;&#8801;&nbsp;</span><span class=\"player_name\">" +
+        new_player.innerHTML = "<span class=list_player id=\"player_name\">" +
             players[i] +
             "</span>\n";
         player_list.appendChild(new_player);
@@ -48,7 +49,7 @@ function tally() {
         var player_name = "unknown error";
         for (var j = 0; j < node.childNodes.length; j++) {
             var subnode = node.childNodes[j];
-            if (subnode.className === "player_name") {
+            if (subnode.id === "player_name") {
                 player_name = subnode.innerHTML;
             }
         }
@@ -91,7 +92,7 @@ function default_settings(newname) {
         disabled: false, // Disables the sortable if set to true.
         store: null, // @see Store
         animation: 100, // ms, animation speed moving items when sorting, `0` - without animation
-        handle: ".my-handle", // Drag handle selector within list items
+//        handle: ".my-handle", // Drag handle selector within list items
         filter: ".ignore-elements", // Selectors that do not lead to dragging (String or Function)
         draggable: ".item", // Specifies which items inside the element should be draggable
         ghostClass: "sortable-ghost", // Class name for the drop placeholder
