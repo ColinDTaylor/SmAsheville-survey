@@ -7,7 +7,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('survey', {
       stylesheet : "stylesheets/survey-styles.css",
-      title  :   "Zhwang!"
+      title  :   "Zhwang!",
+      question_1: "mushrooms?",
+      question_2: "mushrooms."
   });
 });
 
