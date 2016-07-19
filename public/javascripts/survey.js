@@ -2,33 +2,17 @@
 window.onload = function() {
     // populate main list
     // <div class="item"><span class="my-handle">&nbsp;&#8801;&nbsp;</span>name</div>
-    var player_list = document.getElementById('player_pool');
-    var rankings_list = document.getElementById('rankings');
-    var players = [
-        "player1",
-        "player2",
-        "player3",
-        "player4",
-        "player5"
-    ];
-    // TODO: replace this with a handlebars template
-    for (var i = 0; i < players.length; i++) {
-        var new_player = document.createElement("li");
-        new_player.className = "list_player";
-        new_player.innerHTML = `<div>player_${i}</div>`;
-        player_list.appendChild(new_player);
-    }
-    var sortable1 = default_settings("ranking"); 
-    var sortable2 = default_settings("unlisted");
-  
-    sortable2.animation = 100;
-  
-    Sortable.create(player_list, sortable1);
-    Sortable.create(rankings_list, sortable2);
+    let player_list = document.getElementById('player_pool');
+    let rankings_list = document.getElementById('rankings');
+
+    let [sortablePlayerPool, sortableRankings] = [default_settings(100), default_settings(100)];
+
+    Sortable.create(player_list, sortablePlayerPool);
+    Sortable.create(rankings_list, sortableRankings);
 
 };
 
-function default_settings(newname) {
+function default_settings(animationSpeed) {
     return {
         group: {
             name: "newname",
@@ -39,7 +23,7 @@ function default_settings(newname) {
         delay: 0, // time in milliseconds to define when the sorting should start
         disabled: false, // Disables the sortable if set to true.
         store: null, // @see Store
-        animation: 0, // ms, animation speed moving items when sorting, `0` - without animation
+        animation: animationSpeed, // ms, animation speed moving items when sorting, `0` - without animation
 //        handle: ".my-handle", // Drag handle selector within list items
         filter: ".ignore-elements", // Selectors that do not lead to dragging (String or Function)
         draggable: ".list_player", // Specifies which items inside the element should be draggable
@@ -168,11 +152,11 @@ function tally() {
 
 
 
-//-----CODE GRAVEYARD-----//  
+//-----CODE GRAVEYARD-----//
     //
     //window.onload = function() {
     //    // populate main list
-    //    
+    //
     //    var player_list = document.getElementById('players');
     //    var players = [
     //        "player1",

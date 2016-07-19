@@ -15,47 +15,37 @@
         <h1>SmAsheville PR</h1>
         <h2>Ballot for the 2016 Spring Season</h2>
         <div class="line"></div>
-        
+
         <!-- tag question -->
         <div class="tag-q-wrapper">
             <p class="yourtag">Your Tag:</p>
-            <input type="text" class="text" id="tag">       
+            <input type="text" class="text" id="tag">
         </div>
-        
+
         <h2 class="header">Main Votes<br></h2>
-        
+
         <!-- First sortable list header -->
         <!-- TODO: remove this inline style -->
         <div class="votewrapper">
             <div class="listbox players">
                 <h2 class="item">Player Pool<br><span style="font-size:10px">leave em' here 2 die</span></h2>
                 <ul class=player_list id=player_pool>
-                    <li class="list_player">
-                        <div>item_01</div>
-                    </li>
-                    <li class="list_player">
-                        <div>item_02</div>
-                    </li>
-                    <li class="list_player">
-                        <div>item_03</div>
-                    </li>
+                    {{#each playerArray}}
+                        <li class="list_player">
+                            <div>{{this}}</div>
+                        </li>
+                    {{/each}}
                 </ul>
             </div>
             <div class="listbox ranking">
-                <h2 class="item">Final Ranks<br><span style="font-size:10px">place players ranked in order from best to worst here</span></h2>
+                <h2 class="item2">Final Ranks<br><span style="font-size:10px">place players ranked in order from best to worst here</span></h2>
                 <ul class=ranking_list id=rankings>
-                    <li class="list_player">
-                        <div>item_q</div>
-                    </li>
-                    <li class="list_player">
-                        <div>gggggg</div>
-                    </li>
                 </ul>
             </div>
         </div>
-        
+
         <h2 class="header">Additional Awards<br></h2>
-        
+
         <h2 class="item">{{question_1}}</h2>
         <select class="pulldown" name="stuffs">
             <option>person1</option>
@@ -63,7 +53,7 @@
             <option>person3</option>
             <option>person4</option>
         </select>
-        
+
         <h2 class="item">{{question_2}}</h2>
         <select class="pulldown" name="wowok">
             <option>person1</option>
@@ -71,7 +61,7 @@
             <option>person3</option>
             <option>person4</option>
         </select>
-        
+
         <div class="breaker"></div>
         <div class="breaker"></div>
         <div class="line"></div>
