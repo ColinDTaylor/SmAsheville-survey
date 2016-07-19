@@ -42,8 +42,7 @@ h2.item {
     background-color: #fefefe;
     border-bottom: 2px solid gray;
     height: 3.5rem;
-    /*flex-basis: auto;*/
-    flex-grow: 1;
+    flex-grow: 0;
 }
 
 h2.item2 {
@@ -180,15 +179,36 @@ ul {
     border-left: 1px solid lightgray;
 }
 
-.player_list > li {
-    width: 50%;
-}
-
 .listbox {
     display: flex;
     border: none;
     flex-wrap: wrap;
 }
+
+.players {
+    width: 14rem;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    /*height: 100%;*/
+}
+
+    .player_list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        background-color: #ddddff;
+        flex: 1 0 auto;
+    }
+
+        .player_list > li {
+            width: 50%;
+            height: 1.5rem;
+            flex-grow: 0;
+            display: flex;
+            align-items: center;
+        }
 
 .ranking {
     flex: 1 0 auto;
@@ -220,10 +240,8 @@ ul {
     border-bottom: none;
 }
 
-.players {
-    flex-grow: 0;
-    flex-shrink: 0;
-    width: 14rem;
+.blocklistwrapper {
+    display: block;
 }
 
 .votewrapper {
@@ -235,14 +253,7 @@ ul {
     border: 1px solid black;
 }
 
-.player_list {
-    display: flex;
-    flex-direction:row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-content: flex-start;
-    background-color: #ddddff;
-}
+
 
 .sortable-ghost {
     opacity: .5;
@@ -250,5 +261,5 @@ ul {
 }
 
 .sortable-chosen {
-    background-color: transparent;
+
 }
