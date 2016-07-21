@@ -6,6 +6,7 @@ var Aliases = {};
 
 // TODO: store this list in the mongoDB and then grab it
 // TODO: make an alias list generator that uses and displays seasonal data
+// TODO: toLowerCase() all these keys and store correct caps under usualTag
 
 // The big list of historical tag aliases for each SmAsheville player
 Aliases.bigList = {

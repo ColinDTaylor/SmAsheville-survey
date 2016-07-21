@@ -9,7 +9,8 @@
 
 <body>
     <div class="main">
-        <!-- page header --><div class="breaker"></div>
+        <!-- page header -->
+        <div class="breaker"></div>
         <div class="breaker"></div>
         <div class="line"></div>
         <h1>SmAsheville PR</h1>
@@ -29,17 +30,18 @@
         <div class="votewrapper">
             <div class="listbox players">
                 <h2 class="item">Player Pool<br><span style="font-size:10px">leave em' here 2 die</span></h2>
-                <ul class=player_list id=player_pool>
+                <ul class="player_list" id="player_pool">
                     {{#each playerArray}}
                         <li class="list_player">
-                            <div>{{this}}</div>
+                            <div class="player_name">{{this}}</div>
                         </li>
                     {{/each}}
                 </ul>
             </div>
+            <!-- TODO: make the li elements in this list bigger -->
             <div class="listbox ranking">
                 <h2 class="item2">Final Ranks<br><span style="font-size:10px">place players ranked in order from best to worst here</span></h2>
-                <ul class=ranking_list id=rankings>
+                <ul class=ranking_list id=ranking_list>
                 </ul>
             </div>
         </div>
@@ -47,7 +49,7 @@
         <h2 class="header">Additional Awards<br></h2>
 
         <h2 class="item">{{question_1}}</h2>
-        <select class="pulldown" name="stuffs">
+        <select class="pulldown" name="stuffs" id="question_1">
             <option>person1</option>
             <option>person2</option>
             <option>person3</option>
@@ -55,7 +57,7 @@
         </select>
 
         <h2 class="item">{{question_2}}</h2>
-        <select class="pulldown" name="wowok">
+        <select class="pulldown" name="wowok" id="question_2">
             <option>person1</option>
             <option>person2</option>
             <option>person3</option>

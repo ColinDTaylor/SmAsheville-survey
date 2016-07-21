@@ -1,3 +1,6 @@
+/*TODO: clean up the css*/
+
+
 * {
     box-sizing: border-box;
     color: #2a3744;
@@ -14,12 +17,12 @@ body {
 }
 
 .main {
-    border-radius: 10px;
+    border-radius: 5px;
     width: 90%;
     max-width: 600px;
     background-color: rgb(171, 204, 255);
     background-position: center center;
-    margin: 8px auto 8px auto;
+    margin: 5px auto 3px auto;
     text-align: center;
 }
 
@@ -57,7 +60,6 @@ h2.item2 {
     padding-top: 8px;
     padding-bottom: 8px;
     margin-top: .5em;
-/*    margin-bottom: 1em;*/
     width: 20%;
     display: inline-block;
     float: right;

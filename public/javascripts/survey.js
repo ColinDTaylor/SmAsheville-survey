@@ -1,13 +1,13 @@
-// TODO: Learn what this is actually doing
+// TODO: fix how inconsistent all of the variable names are across here
 window.onload = function() {
     // populate main list
     // <div class="item"><span class="my-handle">&nbsp;&#8801;&nbsp;</span>name</div>
-    let player_list = document.getElementById('player_pool');
-    let rankings_list = document.getElementById('rankings');
+    let unranked_list = document.getElementById('player_pool');
+    let rankings_list = document.getElementById('ranking_list');
 
     let [sortablePlayerPool, sortableRankings] = [default_settings(100), default_settings(100)];
 
-    Sortable.create(player_list, sortablePlayerPool);
+    Sortable.create(unranked_list, sortablePlayerPool);
     Sortable.create(rankings_list, sortableRankings);
 
 };
@@ -15,7 +15,7 @@ window.onload = function() {
 function default_settings(animationSpeed) {
     return {
         group: {
-            name: "newname",
+            name: "iDontKnowIfTheseNeedANameOrNotButItHasToBeTheSameAnywaysSoHereItIs",
             put: true,
             pull: true
         }, // or { name: "...", pull: [true, false, clone], put: [true, false, array] }
@@ -95,69 +95,79 @@ function default_settings(animationSpeed) {
 }
 
 function tally() {
-    var debug_output = document.getElementById("debug");
-    var tag = document.getElementById("tag").value;
+    let debug_output = document.getElementById("debug");
 
-    var player_list = document.getElementById('players');
-    var player_list_array = [];
-    var na_list_array = [];
+    let unranked_list = document.getElementById('player_pool');
+    let ranked_list = document.getElementById('ranking_list');
+    let questions = document.getElementsByTagName("select");
 
-    var ranked = true;
-    for (var i = 0; i < player_list.childNodes.length; i++) {
+    let tag = document.getElementById("tag").value;
+    let answers = [];
 
-        var node = player_list.childNodes[i];
+    // Populate the array of unranked players by iterating through the html
+    let unranked_list_array = parseListHTML(unranked_list);
+    let ranked_list_array = parseListHTML(ranked_list);
 
-        if (node.className !== "item") {
-            continue;
-        }
-
-        if (node.id === "placeholder") {
-            ranked = false;
-            continue;
-        }
-
-        var player_name = "unknown error";
-        for (var j = 0; j < node.childNodes.length; j++) {
-            var subnode = node.childNodes[j];
-            if (subnode.id === "player_name") {
-                player_name = subnode.innerHTML;
-            }
-        }
-
-        if (ranked) {
-            player_list_array.push(player_name);
-        } else {
-            na_list_array.push(player_name);
-        }
-
+    for (let q of questions) {
+        answers.push(q.value);
     }
 
-    var questions = document.getElementsByTagName("select");
-    var answers = [];
-    for (var n = 0; n < questions.length; n++) {
-        var question = questions[n];
-        answers.push(question.value);
-    }
-
-    var tally = {
+    let tally = {
         tag: tag,
-        ranked_players: player_list_array,
-        unranked_players: na_list_array,
+        pr_list: ranked_list_array,
+        unranked_players: unranked_list_array,
         answers: answers
     };
 
-    debug_output.value = JSON.stringify(tally, null, ' ');
+    let final_output = JSON.stringify(tally, null, ' ');
+
+    submitFormJSON(final_output);
+
+    debug_output.value = final_output;
+
 
 }
 
+function parseListHTML(input) {
 
+    output = [];
+
+    for (let node of input.childNodes) {
+
+        if (node.className !== "list_player") {
+            continue;
+        }
+
+        for (let subnode of node.childNodes) {
+            if (subnode.className === "player_name") {
+                output.push(subnode.innerHTML);
+            }
+        }
+    }
+    return output;
+}
+
+function submitFormJSON(jsonData) {
+
+    fetch('http://localhost:3000/survey', {
+    	method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    	body: jsonData
+    })
+    .then(response => {
+        console.log(response);
+    });
+}
 
 //-----CODE GRAVEYARD-----//
     //
     //window.onload = function() {
     //    // populate main list
     //
-    //    var player_list = document.getElementById('players');
+    //    var unranked_list = document.getElementById('players');
     //    var players = [
     //        "player1",
     //        "player2",
@@ -172,9 +182,9 @@ function tally() {
     //        new_player.innerHTML = "<span class=list_player id=\"player_name\">" +
     //            players[i] +
     //            "</span>\n";
-    //        player_list.appendChild(new_player);
+    //        unranked_list.appendChild(new_player);
     //    }
-    //    var sortable1 = Sortable.create(player_list, default_settings("players"));
+    //    var sortable1 = Sortable.create(unranked_list, default_settings("players"));
     //
     //};
     //

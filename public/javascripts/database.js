@@ -1,7 +1,7 @@
 var challongeApi = require('./api-basics.js');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-
+// let MongooseModels = require('./mongoose.js');
 
 // Connection URL
 // var url = 'mongodb://localhost:27017/SmAsheville';
@@ -132,7 +132,6 @@ database.cleanParticipantData = function(data) {
 database.cleanMatchData = function(data) {
     //Unused for now
 };
-
 
 module.exports = database;
 
