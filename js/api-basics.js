@@ -82,7 +82,7 @@ challongeApi.showParticipant = function(t_id, p_id) {
 
 /*--------------------MATCHES-----------------------*/
 
-// TODO: turn match api function wrapper wrappers into promises
+// TODO:260 turn match api function wrapper wrappers into promises
 
 challongeApi.indexMatches = function(t_id, callback) {
     client.matches.index({

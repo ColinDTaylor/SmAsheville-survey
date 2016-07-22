@@ -12,7 +12,7 @@ var survey = require('./routes/survey');
 
 var app = express();
 
-// var challongeApi = require('./public/javascripts/api-basics.js');
+// var challongeApi = require('./js/api-basics.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var challongeApi = require('../public/javascripts/api-basics.js');
+var challongeApi = require('../js/api-basics.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

@@ -4,9 +4,9 @@ var queries = require('./queries.js');
 
 // Should this be a class? I don't yet know how to use classes in ES6 or if I even ever should
 
-// TODO: make a set of seasons which contains the ranges of tournaments at each one.
-// NOTE: these are projected seasons, they might end up being different if we have to skip a week
-// TODO: make the seasons based on actual real world seasons, it'll be cleaner that way.
+// TODO:100 make a set of seasons which contains the ranges of tournaments at each one.
+// NOTE:10 these are projected seasons, they might end up being different if we have to skip a week
+// TODO:130 make the seasons based on actual real world seasons, it'll be cleaner that way.
 var seasons = {
     2016: {
         spring: [60, 72],
@@ -18,7 +18,7 @@ var seasons = {
 
 var PrData = {};
 
-// TODO: create a class "Player" which generates all of these stats in its constructor
+// TODO:60 create a class "Player" which generates all of these stats in its constructor
 
 PrData.uniqueParticipants = function(input) {
 
@@ -32,7 +32,7 @@ PrData.bestPlacement = function(input) {
 
 };
 
-// TODO: make this take a season as an input, requires seasonal alias lists
+// TODO:180 make this take a season as an input, requires seasonal alias lists
 // output = sorted array of arrays in the form ['tag', attendancNum]
 PrData.attendance = function() {
     let outputArray = [];
@@ -43,7 +43,7 @@ PrData.attendance = function() {
         outputArray[playerIndex] = [player, 0];
         for (let alias in aliasHandler.bigList[player]) {
 
-            // TODO: make this bugfix unecessary, a "player" class should do the trick
+            // TODO:140 make this bugfix unecessary, a "player" class should do the trick
             if (alias == 'usualTag') {
                 continue;
             }
@@ -72,7 +72,7 @@ PrData.attendance = function() {
 };
 
 PrData.generateEligibility = function(season) {
-    // TODO: update to work cross-seasonally
+    // TODO:290 update to work cross-seasonally
     let attendance = PrData.attendance();
     let eligibleAttendance = [];
     let missingTop8 = [];

@@ -1,11 +1,11 @@
 // this file is here to handle the mapping of certain useful objects from the db
-// TODO: start using mongoose to make accessing the database cleaner in the future.
+// TODO:210 start using mongoose to make accessing the database cleaner in the future.
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 let Operations = {};
 
-// TODO: update this to work with a more universal database name
+// TODO:280 update this to work with a more universal database name
 mongoose.connect('mongodb://localhost:27017/SmAsheville');
 
 let db = mongoose.connection;
@@ -34,6 +34,7 @@ let SurveyResponse = mongoose.model('surveyResponse', surveyResponseSchema);
 
 /* ---------- Operations ---------- */
 
+// NOTE:20 yo I can't believe this worked on the first try
 Operations.logSurveyResponse = function(surveyData) {
 
     SurveyResponse.create(surveyData, (err, data) => {
@@ -46,7 +47,7 @@ Operations.logSurveyResponse = function(surveyData) {
 
 
 /* ---------- Other ---------- */
-// TODO: Real error handling
+// TODO:10 Real error handling
 function handleError(err) {
     console.log('OH GOSH NO');
     throw(err);

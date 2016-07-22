@@ -1,9 +1,9 @@
-// TODO: create the survey route!
+// #Done:0 create the survey route!
 
 var express = require('express');
 var router = express.Router();
-var prData = require('../public/javascripts/pr-data.js');
-var database_mongoose = require('../public/javascripts/mongoose.js');
+var prData = require('../js/pr-data.js');
+var database_mongoose = require('../js/mongoose.js');
 
 
 /* GET home page. */
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 
-    // TODO: add some kind of validation regex to the survey results
+    // TODO:30 add some kind of validation regex to the survey results
 
 
     // a kinda lazy way to add in an IP address to my data for future use

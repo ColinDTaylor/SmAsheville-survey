@@ -1,12 +1,5 @@
 var express = require('express');
-var assert = require('assert');
 var router = express.Router();
-var database = require('../public/javascripts/database.js');
-var challongeApi = require('../public/javascripts/api-basics.js');
-var stats = require('../public/javascripts/api-get.js');
-var aliases = require('../public/javascripts/alias-handler.js');
-var queries = require('../public/javascripts/queries.js');
-var prData = require('../public/javascripts/pr-data.js');
 
 /* GET stats listing */
 router.get('/', function(req, res, next) {
@@ -67,7 +60,7 @@ module.exports = router;
 //     //
 //     //         Stop the app from crashing upon trying to insert a doc that already exists
 //     //
-//     //         TODO: fix this graceful error handler so it can be used.
+//     //         TODO:90 fix this graceful error handler so it can be used.
 //     //
 //     //         if (err) {
 //     //             if (err.name === 'MongoError' && err.code === 11000) {
@@ -119,9 +112,17 @@ module.exports = router;
 //
 //     database.populate(data, "spring_2016.participants", "participants");
 // });
-
+//
 // var avagadro = aliases.lookupAlias("Avagadro");
-
+//
 // queries.getSeasonalTop8s('spring_2016').then(result => {
 //     console.log(result);
 // });
+//
+// var assert = require('assert');
+// var database = require('../js/database.js');
+// var challongeApi = require('../js/api-basics.js');
+// var stats = require('../js/api-get.js');
+// var aliases = require('../js/alias-handler.js');
+// var queries = require('../js/queries.js');
+// var prData = require('../js/pr-data.js');

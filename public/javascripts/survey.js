@@ -1,4 +1,4 @@
-// TODO: fix how inconsistent all of the variable names are across here
+// TODO:80 fix how inconsistent all of the variable names are across here
 window.onload = function() {
     // populate main list
     // <div class="item"><span class="my-handle">&nbsp;&#8801;&nbsp;</span>name</div>
@@ -175,7 +175,7 @@ function submitFormJSON(jsonData) {
     //        "player4",
     //        "player5"
     //    ];
-    //    // TODO: replace this with a handlebars template
+    //    // TODO:190 replace this with a handlebars template
     //    for (var i = 0; i < players.length; i++) {
     //        var new_player = document.createElement("div");
     //        new_player.className = "item";

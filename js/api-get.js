@@ -139,7 +139,6 @@ module.exports = stats;
 // });
 //
 // Fix challonge's awkward formatting
-// TODO: FIX THIS HORRIBLE MONSTER
 // function formatData(data) {
 //
 //     var formattedData = {};
