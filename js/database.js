@@ -10,8 +10,8 @@ var database = {};
 var dbObj = {};
 
 // Use connect method to connect to the server
-// TODO:170 make this less awkward
-// TODO:40 change this to allow for future non-smasheville users
+// TODO:150 make this less awkward
+// TODO:20 change this to allow for future non-smasheville users
 database.connect = function(dbName) {
     var url = 'mongodb://localhost:27017/' + dbName;
 
@@ -29,13 +29,15 @@ database.connect = function(dbName) {
     return dbObj;
 };
 
-// TODO:270 update these database functions to not be terrible
+// TODO:250 update these database functions to not be terrible
 database.close = function(db) {
     db.close();
     console.log("Disconnected succesfully from server");
 };
 
-// TODO:240 this should PROBABLY use insertMany instead, if possible
+// TODO:220 this should PROBABLY use insertMany instead, if possible
+// TODO: Make this 3 separate functions, one for each case.
+// TODO: Change this to insert based on a mongoose schema
 database.populate = function(data, col, type) { // data = challonge data, col = collection
     database.connect('SmAsheville').then(function (db) {   // type = string for type of data: "tournament", "participant", or "match"
         console.log('connected to mongoDB');
@@ -43,29 +45,32 @@ database.populate = function(data, col, type) { // data = challonge data, col = 
         var collection = db.collection(col);
         var promiseArray = [];
 
-        // TODO:150 make this convert the tournamentId into a real tournament name
+        // TODO:130 make this convert the tournamentId into a real tournament name
 
-        // TODO:200 seriously wtf man
+        // TODO:180 seriously wtf man
         var prevId;
-        for (var tournament of data) {
+        for (let tournament of data) {
             switch (type) {
                 case "participants":
-                    for (var player of tournament) {
-                        if (player.participant.tournamentId != prevId) {
-                            console.log("inserting participants for tournamentId " + player.participant.tournamentId + "...");
-                        }
-                        promiseArray.push(insertionPromise(player.participant, collection, type));
-                        prevId = player.participant.tournamentId;
-                    }
+
+                    cleanParticipantData(tournament);
+
+                    // for (let player of tournament) {
+                    //     if (player.participant.tournamentId != prevId) {
+                    //         console.log("inserting participants for tournamentId " + player.participant.tournamentId + "...");
+                    //     }
+                    //     promiseArray.push(insertionPromise(player.participant, collection, type));
+                    //     prevId = player.participant.tournamentId;
+                    // }
                     break;
 
-                    // TODO:230 test this
+                    // TODO:210 test this
                 case "tournaments":
                     console.log("inserting " + tournament.tournament.name + "...");
                     promiseArray.push(insertionPromise(tournament.tournament, collection, type));
                     break;
 
-                    // TODO:20 add match data
+                    // TODO:0 add match data
                 case "matches":
                     for (var match of tournament) {
                         if (player.match.tournamentId != prevId) {
@@ -78,8 +83,6 @@ database.populate = function(data, col, type) { // data = challonge data, col = 
             }
         }
 
-        // console.log(promiseArray);
-
         Promise.all(promiseArray).then(function () {
             console.log('all inserts done, closing...');
             db.close();
@@ -88,7 +91,7 @@ database.populate = function(data, col, type) { // data = challonge data, col = 
     });
 };
 // helper function to keep from creating a function inside of a loop
-// TODO:120 make the log printed here work universally
+// TODO:100 make the log printed here work universally
 function insertionPromise(document, collection, type) {
     return new Promise(function(resolve, reject) {
 
@@ -127,6 +130,9 @@ database.cleanTournamentData = function(data) {
 
 database.cleanParticipantData = function(data) {
 
+    for (let player in data) {
+        console.log(player);
+    }
 };
 
 database.cleanMatchData = function(data) {

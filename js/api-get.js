@@ -3,6 +3,8 @@ var database = require('./database');
 
 var stats = {};
 
+// TODO: clean this challonge data please, clean it gud
+
 stats.getTournaments = function(firstTournament, lastTournament) {
 
     var promiseArray = [];
@@ -27,29 +29,18 @@ stats.getTournaments = function(firstTournament, lastTournament) {
     });
 };
 
-// promiseArray.push(new Promise (function (resolve, reject) {
-//
-//     collection.insert(
-//         item.tournament,
-//
-//         function(err, result) {
-//             assert.equal(err, null);
-//             assert.equal(1, result.result.n);
-//             assert.equal(1, result.ops.length);
-//             console.log("Inserting " + item.tournament.name + " into '" + collection.s.name + "'");
-//         });
-// }));
-
 stats.getParticipants = function(firstTournament, lastTournament) {
 
-    var promiseArray = [];
+    let promiseArray = [];
 
-    if (lastTournament - firstTournament > 100) {
-        console.log("Heck no that's too many participants");
-        return result;
+    if (lastTournament - firstTournament > 50) {
+        console.log("Please break up requests into smaller chunks to avoid overloading the API");
+        return;
     }
 
-    for (var i = firstTournament; i <= lastTournament; i++) {
+    //TODO: change this to work with dates instead of numbers
+
+    for (let i = firstTournament; i <= lastTournament; i++) {
         promiseArray.push(challongeApi.indexParticipants('smasheville' + i));
     }
 
@@ -80,9 +71,9 @@ stats.getMatches = function(firstTournament, lastTournament) {
     return Promise.all(promiseArray).then(function(data) {
 
         // this add an _id field that is equal to the weekly's number (for mongo)
-        for (var item of data) {
+        // for (var item of data) {
             // item.tournament._id = item.tournament.name.substring(11, 13);
-        }
+        // }
 
         return data;
     });

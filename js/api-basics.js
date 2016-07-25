@@ -2,7 +2,7 @@ var challonge = require('challonge');
 //var database = require('./database');
 
 var client = challonge.createClient({
-    apiKey: 'lololoollolololoololooloo'
+    apiKey: 'hvA3eLb7hzOGS5py3PM3ZaGJAlRHTACaktnlobkQ'
 });
 
 var challongeApi = {};
@@ -82,7 +82,7 @@ challongeApi.showParticipant = function(t_id, p_id) {
 
 /*--------------------MATCHES-----------------------*/
 
-// TODO:260 turn match api function wrapper wrappers into promises
+// TODO:240 turn match api function wrapper wrappers into promises
 
 challongeApi.indexMatches = function(t_id, callback) {
     client.matches.index({

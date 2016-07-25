@@ -2,7 +2,7 @@
 
 // commented sections are 100% useless to me.
 
-// NOTE:0 I need a system for naming _id's
+// NOTE:10 _id fields are currently just the standard, make them something useful
 
 
 

@@ -6,7 +6,7 @@ var prData = require('../js/pr-data.js');
 var database_mongoose = require('../js/mongoose.js');
 
 
-/* GET home page. */
+/* GET survey page. */
 router.get('/', (req, res) => {
 
     prData.generateEligibility('spring_2016').then(eligiblePlayers => {
@@ -23,9 +23,13 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/thanks', (req, res) => {
+    res.send("Thanks lol");
+});
+
 router.post('/', (req, res) => {
 
-    // TODO:30 add some kind of validation regex to the survey results
+    // TODO:10 add some kind of validation regex to the survey results
 
 
     // a kinda lazy way to add in an IP address to my data for future use

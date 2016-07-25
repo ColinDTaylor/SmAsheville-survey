@@ -4,9 +4,9 @@
 // This season's alias list created manually because it had to be.
 var Aliases = {};
 
-// TODO:220 store this list in the mongoDB and then grab it
-// TODO:110 make an alias list generator that uses and displays seasonal data
-// TODO:250 toLowerCase() all these keys and store correct caps under usualTag
+// TODO:200 store this list in the mongoDB and then grab it
+// TODO:90 make an alias list generator that uses and displays seasonal data
+// TODO:230 toLowerCase() all these keys and store correct caps under usualTag
 
 // The big list of historical tag aliases for each SmAsheville player
 Aliases.bigList = {
@@ -287,7 +287,7 @@ Aliases.bigList = {
 };
 
 
-// TODO:70 fix all this case crap so that I don't need the patch on Object
+// TODO:50 fix all this case crap so that I don't need the patch on Object
 Aliases.lookupAlias = function(tagToFind, addIfNotFound = false, entryNumParam = 0) {
 
     // console.log(`Searching for ${tagToFind}...`);
@@ -303,7 +303,7 @@ Aliases.lookupAlias = function(tagToFind, addIfNotFound = false, entryNumParam =
             playerObj.usualTag = tagToFind;
         }
         // return with our found name.
-        // TODO:160 make this correct capitalization to use the one from the list.
+        // TODO:140 make this correct capitalization to use the one from the list.
         return tagToFind;
     }
 

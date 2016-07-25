@@ -25,9 +25,9 @@
 	"use strict";
 
 	if (typeof window == "undefined" || typeof window.document == "undefined") {
-		return function() {
-			throw new Error( "Sortable.js requires a window with a document" );
-		}
+		return function () {
+			throw new Error("Sortable.js requires a window with a document");
+		};
 	}
 
 	var dragEl,
@@ -402,7 +402,10 @@
 
 			try {
 				if (document.selection) {
-					document.selection.empty();
+					// Timeout neccessary for IE9
+					setTimeout(function () {
+						document.selection.empty();
+					});
 				} else {
 					window.getSelection().removeAllRanges();
 				}
@@ -803,6 +806,7 @@
 					}
 
 					if (Sortable.active) {
+						/* jshint eqnull:true */
 						if (newIndex == null || newIndex === -1) {
 							newIndex = oldIndex;
 						}
@@ -819,7 +823,7 @@
 			this._nulling();
 		},
 
-		_nulling: function() {
+		_nulling: function () {
 			if (Sortable.active === this) {
 				rootEl =
 				dragEl =

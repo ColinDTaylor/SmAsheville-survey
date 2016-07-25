@@ -1,10 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var api = require('../js/api-get.js');
+var database = require('../js/database.js');
+var mongoose = require('../js/mongoose.js');
 
 /* GET stats listing */
 router.get('/', function(req, res, next) {
 
+    api.getParticipants(7, 7).then(data => {
+        mongoose.insertParticipants(data).then(final => {
+            console.log(final);
+        });
+    });
 
+
+    res.send("what");
 
 });
 
@@ -60,7 +70,7 @@ module.exports = router;
 //     //
 //     //         Stop the app from crashing upon trying to insert a doc that already exists
 //     //
-//     //         TODO:90 fix this graceful error handler so it can be used.
+//     //         TODO:70 fix this graceful error handler so it can be used.
 //     //
 //     //         if (err) {
 //     //             if (err.name === 'MongoError' && err.code === 11000) {
