@@ -2,19 +2,57 @@
 window.onload = function() {
     // populate main list
     // <div class="item"><span class="my-handle">&nbsp;&#8801;&nbsp;</span>name</div>
-    var unranked_list = document.getElementById('player_pool');
-    var rankings_list = document.getElementById('ranking_list');
+    let unranked_list = document.getElementById('player_pool');
+    let rankings_list = document.getElementById('ranking_list');
 
-    var unranked_sortable = Sortable.create(unranked_list, default_settings(100));
-    var rankings_sortable = Sortable.create(rankings_list, default_settings(100));
+    window.unranked_sortable = Sortable.create(unranked_list, default_settings(100));
+    window.rankings_sortable = Sortable.create(rankings_list, default_settings(100));
 
-    rankings_sortable.onSort = function(evt) {
-        unranked_sortable.save();
-        rankings_sortable.save();
-    };
+    if (verifyLocalFormData()) {
+        console.log('form verified');
+        applyLocalFormData();
+    }
 };
 
+// Use some client-side handlebars to reload the lists if localstorage contaings data for them
+function applyLocalFormData() {
 
+    console.log('yoo')
+
+    let listTemplateString = `
+    {{#each inputArray}}
+        <li class="list_player" data-id="{{{this}}}">
+            <div class="player_name">{{{this}}}</div>
+        </li>
+    {{/each}}`;
+
+    let listTemplate = Handlebars.compile(listTemplateString);
+
+    let unrankedContext = {inputArray: localStorage.getItem('player_list').split('|')};
+    let rankingsContext = {inputArray: localStorage.getItem('ranking_list').split('|')};
+
+    console.log(listTemplate(rankingsContext));
+
+    document.getElementById('player_pool').innerHTML = listTemplate(unrankedContext);
+    document.getElementById('ranking_list').innerHTML = listTemplate(rankingsContext);
+}
+
+// Makes sure that the local data (if any exists) matches the current player list
+function verifyLocalFormData() {
+    let storedLists = new Set((localStorage.getItem('player_list').split('|').concat(
+                       localStorage.getItem('ranking_list').split('|'))));
+    console.log(storedLists);
+
+    for (let player of window.playerArray) {
+        if (storedLists.has(player)) {
+            continue;
+        } else {
+            console.log(player);
+            return 0;
+        }
+    }
+    return 1;
+}
 
 function default_settings(animationSpeed) {
     return {
@@ -80,6 +118,9 @@ function default_settings(animationSpeed) {
 
         // Called by any change to the list (add / update / remove)
         onSort: function( /**Event*/ evt) {
+
+        window.unranked_sortable.save();
+        window.rankings_sortable.save();
 
         },
 

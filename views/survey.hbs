@@ -5,9 +5,13 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
     <link rel="stylesheet" href="../public/stylesheets/survey-styles.css">
+    <!-- TODO: come up with a better way to pass playerArray into clientside -->
+    <script>
+        window.playerArray = "{{{playerArray}}}".split(",");
+    </script>
 </head>
 
-<body>
+<body onbeforeunload="unranked_sortable.save();">
     <div class="main">
         <!-- page header -->
         <div class="breaker"></div>
@@ -80,5 +84,6 @@
         <div class="breaker"></div>
     </div>
 </body>
+<script src="javascripts/handlebars-v4.0.5.js"></script>
 <script src="javascripts/Sortable.js"></script>
 <script src="javascripts/survey.js"></script>

@@ -11,14 +11,13 @@ router.get('/', (req, res) => {
 
     prData.generateEligibility('spring_2016').then(eligiblePlayers => {
 
-
-
       res.render('survey', {
           stylesheet : "stylesheets/survey-styles.css",
           title  :   "Zhwang!",
           question_1: "mushrooms?",
           question_2: "mushrooms.",
-          playerArray: eligiblePlayers
+          playerArray: eligiblePlayers,
+          rankedArray: null
       });
   });
 });
