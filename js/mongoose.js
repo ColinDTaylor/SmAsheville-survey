@@ -36,6 +36,28 @@ let participantSchema = new Schema({
     finalRank: Number,
 });
 
+let tournamentSchema = new Schema({
+    id: Number,
+    name: String,
+    url: String,
+    description: String,
+    startedAt: Date,
+    completedAt: Date,
+    createdAt: Date,
+    updatedAt: Date,
+    gameId: Number,
+    participantsCount: Number,
+    state: String,
+    fullChallongeUrl: String,
+    liveImageUrl: String,
+    gameName: String,
+    progressMeter: Number // TODO: use this to verify that all tournaments have been completed
+});
+
+let matchSchema = new Schema({
+    // TODO: make the match schema lol
+});
+
 // var top8GettersSchema = new Schema({
 //     name: String,
 // }, { collection: 'spring_2016.participants'});
@@ -45,6 +67,7 @@ let participantSchema = new Schema({
 
 let SurveyResponse = mongoose.model('surveyResponse', surveyResponseSchema);
 let Participant = mongoose.model('cleanTest.participant', participantSchema);
+let Tournament = mongoose.model('cleanTest.tournament', tournamentSchema);
 
 /* ---------- Operations ---------- */
 
@@ -59,12 +82,36 @@ Operations.logSurveyResponse = function(surveyData) {
 
 };
 
+// NOTE: these are almost identical, but it almost seems like it's better to leave them separate
+
 Operations.insertParticipants = function(inputData) {
     let promiseArray = [];
 
     for (let tournament of inputData) {
         for (let participant of tournament) {
             promiseArray.push(insertionPromise(participant.participant));
+        }
+    }
+
+    return promiseArray;
+};
+
+Operations.insertTournaments = function(inputData) {
+    let promiseArray = [];
+
+    for (let tournament of inputData) {
+        promiseArray.push(insertionPromise(tournament.tournament));
+    }
+
+    return promiseArray;
+};
+
+Operations.insertMatches = function(inputData) {
+    let promiseArray = [];
+
+    for (let tournament of inputData) {
+        for (let match of tournament) {
+            // TODO: writh the match insert lol
         }
     }
 

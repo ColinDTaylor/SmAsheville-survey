@@ -1,6 +1,10 @@
+//TODO: update this to use mongoose instead
+
 var database = require('./database.js');
 var aliasHandler = require('./alias-handler.js');
 // This file is here to contain all functions that query the existing database for certain datasets
+
+// TODO: update this to use mongoose
 
 var Queries = {};
 var dbPromise = database.connect('SmAsheville');

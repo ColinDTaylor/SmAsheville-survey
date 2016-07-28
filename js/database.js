@@ -1,3 +1,8 @@
+/*    THIS IS ALL PRETTY MUCH DEPRECATED    */
+/*    use the mongoose functions instead    */
+
+
+
 var challongeApi = require('./api-basics.js');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
@@ -10,8 +15,6 @@ var database = {};
 var dbObj = {};
 
 // Use connect method to connect to the server
-// TODO:150 make this less awkward
-// TODO:20 change this to allow for future non-smasheville users
 database.connect = function(dbName) {
     var url = 'mongodb://localhost:27017/' + dbName;
 
@@ -29,15 +32,11 @@ database.connect = function(dbName) {
     return dbObj;
 };
 
-// TODO:250 update these database functions to not be terrible
 database.close = function(db) {
     db.close();
     console.log("Disconnected succesfully from server");
 };
 
-// TODO:220 this should PROBABLY use insertMany instead, if possible
-// TODO: Make this 3 separate functions, one for each case.
-// TODO: Change this to insert based on a mongoose schema
 database.populate = function(data, col, type) { // data = challonge data, col = collection
     database.connect('SmAsheville').then(function (db) {   // type = string for type of data: "tournament", "participant", or "match"
         console.log('connected to mongoDB');
@@ -90,8 +89,6 @@ database.populate = function(data, col, type) { // data = challonge data, col = 
         });
     });
 };
-// helper function to keep from creating a function inside of a loop
-// TODO:100 make the log printed here work universally
 function insertionPromise(document, collection, type) {
     return new Promise(function(resolve, reject) {
 
@@ -140,26 +137,3 @@ database.cleanMatchData = function(data) {
 };
 
 module.exports = database;
-
-
-// /*--------------CODE GRAVEYARD--------------*/
-//
-// rip
-//
-// database.insert = function(db, col, newDoc, callback) {
-//
-//     // Get the collection
-//     var collection = db.collection(col);
-//     // Insert some documents
-//     collection.insert(
-//         newDoc,
-//         function(err, result) {
-//             assert.equal(err, null);
-//             assert.equal(1, result.result.n);
-//             assert.equal(1, result.ops.length);
-//             console.log("Inserted sum documents into the collection");
-//
-//             callback();
-//     });
-//
-// };
