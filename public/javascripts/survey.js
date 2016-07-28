@@ -1,4 +1,5 @@
 // TODO:60 fix how inconsistent all of the variable names are across here
+// TODO: fix up the answer-remembering, it's really ugly code right now
 window.onload = function() {
     // populate main list
     // <div class="item"><span class="my-handle">&nbsp;&#8801;&nbsp;</span>name</div>
@@ -17,8 +18,6 @@ window.onload = function() {
 // Use some client-side handlebars to reload the lists if localstorage contaings data for them
 function applyLocalFormData() {
 
-    console.log('yoo')
-
     let listTemplateString = `
     {{#each inputArray}}
         <li class="list_player" data-id="{{{this}}}">
@@ -35,6 +34,11 @@ function applyLocalFormData() {
 
     document.getElementById('player_pool').innerHTML = listTemplate(unrankedContext);
     document.getElementById('ranking_list').innerHTML = listTemplate(rankingsContext);
+
+    document.getElementById('tag').value = localStorage.getItem('tag');
+
+    document.getElementById('question_1').value = localStorage.getItem('question_1');
+    document.getElementById('question_2').value = localStorage.getItem('question_2');
 }
 
 // Makes sure that the local data (if any exists) matches the current player list
@@ -212,4 +216,13 @@ function submitFormJSON(jsonData) {
     .then(response => {
         console.log(response);
     });
+}
+
+function saveTagString() {
+    localStorage.setItem('tag', document.getElementById('tag').value);
+}
+
+function saveQuestionChoices() {
+    localStorage.setItem('question_1', document.getElementById('question_1').value);
+    localStorage.setItem('question_2', document.getElementById('question_2').value);
 }

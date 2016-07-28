@@ -24,7 +24,7 @@
         <!-- tag question -->
         <div class="tag-q-wrapper">
             <p class="yourtag">Your Tag:</p>
-            <input type="text" class="text" id="tag">
+            <input type="text" class="text" id="tag" onchange="saveTagString();">
         </div>
 
         <h2 class="header">Main Votes<br></h2>
@@ -54,7 +54,7 @@
         <h2 class="header">Additional Awards<br></h2>
 
         <h2 class="item">{{question_1}}</h2>
-        <select class="pulldown" name="stuffs" id="question_1">
+        <select class="pulldown" name="stuffs" id="question_1" onchange="saveQuestionChoices()">
             <option></option>
             {{#each playerArray}}
                 <option>{{this}}</option>
@@ -62,7 +62,7 @@
         </select>
 
         <h2 class="item">{{question_2}}</h2>
-        <select class="pulldown" name="wowok" id="question_2">
+        <select class="pulldown" name="wowok" id="question_2" onchange="saveQuestionChoices()">
             <option></option>
             {{#each playerArray}}
                 <option>{{this}}</option>
