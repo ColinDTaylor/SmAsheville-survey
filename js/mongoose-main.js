@@ -61,6 +61,17 @@ let matchSchema = new Schema({
   name: String
 })
 
+let seasonSchema = new Schema({
+  name: String,
+  year: Number,
+  startDate: Date,
+  endDate: Date,
+  eligible: {
+    ranking: [String],
+    questions: [String],
+    new: [String]
+  }
+})
 // let top8GettersSchema = new Schema({
 //   name: String,
 //   tournamentId: Number
@@ -135,6 +146,7 @@ function handleError (err) {
   console.log('OH GOSH NO')
   throw (err)
 }
+
 Exports.Operations = Operations
 Exports.Models = Models
 
