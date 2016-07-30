@@ -1,7 +1,7 @@
 /*    THIS IS ALL PRETTY MUCH DEPRECATED    */
 /*    use the mongoose functions instead    */
 
-
+// TODO: Remove all uses of this
 
 var challongeApi = require('./api-basics.js');
 var MongoClient = require('mongodb').MongoClient;
