@@ -1,7 +1,8 @@
 // Module used to manipulate and get date ranges for seasons.
 
-var mongoose = require('mongoose')
-var database = require('./mongoose-main')
+// var mongoose = require('mongoose')
+// var database = require('./mongoose-main')
+var queries = require('./queries')
 // SmAsheville Seasons:
 //
 // Spring:     Feb 1st -> Apr 30th
@@ -30,19 +31,48 @@ const WINTER = {
 
 module.exports = class Season {
 
-  constructor (year, start, end) {
-    // If `end` isn't provided, assume start = object w/ both values
-
-    console.log('hello')
-    if (end) {
-      this.startDate = new Date(start)
-      this.endDate = new Date(end)
+  constructor (year, first, last) {
+    // If `end` isn't provided, assume first = object w/ both values
+    if (last) {
+      this.startDate = new Date(first)
+      this.endDate = new Date(last)
     } else {
-      this.startDate = start.start
-      this.endDate = start.end
+      // this is awkward naming, but in this case first = a season const object
+      this.startDate = first.start
+      this.endDate = first.end
     }
     this.startDate.setFullYear(year)
     this.endDate.setFullYear(year)
+  }
+
+  get tournaments () {
+    return queries.getTournamentsByDates(this.startDate, this.endDate).then(docs => {
+      console.log(docs)
+      return docs
+    })
+  }
+
+  get participants () {
+    return queries.getParticipantsByDates(this.startDate, this.endDate).then(docs => {
+      console.log(docs)
+      return docs
+    })
+  }
+
+  get matches () {
+    // return queries.getMatchesByDates(this.startDate, this.endDate)
+  }
+
+  get prEligible () {
+      // TODO: write eligiblility function
+  }
+
+  get otherEligible () {
+
+  }
+
+  get uniqueParticipants () {
+
   }
 
   static get spring () {
@@ -59,29 +89,5 @@ module.exports = class Season {
 
   static get winter () {
     return WINTER
-  }
-
-  get tournaments () {
-
-  }
-
-  get participants () {
-
-  }
-
-  get matches () {
-
-  }
-
-  get prEligible () {
-      // TODO: write eligiblility function
-  }
-
-  get otherEligible () {
-
-  }
-
-  get uniqueParticipants () {
-
   }
 }

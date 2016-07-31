@@ -81,8 +81,8 @@ let seasonSchema = new Schema({
 // TODO: move several of these models over to their respective functions
 // TODO: how can I make the collection used by these modular?
 Models.SurveyResponses = mongoose.model('Models.SurveyResponse', surveyResponseSchema)
-Models.Participants = mongoose.model('spring_2016.participant', participantSchema)
-Models.Tournaments = mongoose.model('spring_2016.tournament', tournamentSchema)
+Models.Participants = mongoose.model('qtest.participant', participantSchema)
+Models.Tournaments = mongoose.model('q2test.tournament', tournamentSchema)
 Models.Matches = mongoose.model('cleanTest.match', matchSchema)
 // let Top8Getter = mongoose.model('cleanTest.top8getter', top8GettersSchema)
 
@@ -113,7 +113,9 @@ Operations.insertParticipants = function (inputData) {
 
 Operations.insertTournaments = function (inputData) {
   let promiseArray = []
+
   for (let tournament of inputData) {
+    console.log(tournament)
     promiseArray.push(insertionPromise(tournament.tournament, Models.Tournaments))
   }
 

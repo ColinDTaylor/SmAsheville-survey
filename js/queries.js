@@ -6,6 +6,34 @@ var database = require('./mongoose-main.js').Models
 
 var Queries = {}
 
+// POLISH: allow these functions to take either a start and end date, or a season
+
+// Theses two functions are nearly identical, but they're easier to maintain if kept separate
+// `selection` is an optional string arg which allows the caller to specify wanted fields
+Queries.getParticipantsByDates = function (startDate, endDate, selection) {
+  return database.Participants
+    .find()
+    .where('createdAt').gte(startDate)
+    .where('createdAt').lte(endDate)
+    .select(selection)
+    .sort('createdAt')
+    .exec().then(docs => {
+      return docs
+    })
+}
+
+Queries.getTournamentsByDates = function (startDate, endDate, selection) {
+  return database.Tournaments
+    .find()
+    .where('createdAt').gte(startDate)
+    .where('createdAt').lte(endDate)
+    .select(selection)
+    .sort('createdAt')
+    .exec().then(docs => {
+      return docs
+    })
+}
+
 // This function generates a list of players who have gotten a top 8 result in the given season
 // Input is a string of the season name you're looking for (ex: 'spring_2016')
 // Note: the players are only supplied if they got a top 8 at a tournament with over 16 players
