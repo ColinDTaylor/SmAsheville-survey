@@ -1,107 +1,107 @@
-var challonge = require('challonge');
+var challonge = require('challonge')
 
 var client = challonge.createClient({
-    apiKey: 'hvA3eLb7hzOGS5py3PM3ZaGJAlRHTACaktnlobkQ'
-});
+  apiKey: 'hvA3eLb7hzOGS5py3PM3ZaGJAlRHTACaktnlobkQ'
+})
 
-var challongeApi = {};
+var challongeApi = {}
 
-// database.testConnection();
+// database.testConnection()
 
-/*--------------------TOURNAMENTS-----------------------*/
+/* --------------------TOURNAMENTS----------------------- */
 
 // challongeApi.indexTournaments = function(callback) {
 //     client.tournaments.index({
 //         callback: function(err, data){
-//             if (err) { console.log(err); return; }
-//             callback(data);
+//             if (err) { console.log(err) return }
+//             callback(data)
 //         }
-//     });
+//     })
 // }
 
 // challongeApi.showTournament = function(t_id, callback) {
 //     client.tournaments.show({
 //         id :    t_id,
 //         callback: function(err, data){
-//             if (err) { console.log(err); return; }
-//             callback(data);
+//             if (err) { console.log(err) return }
+//             callback(data)
 //         }
-//     });
+//     })
 // }
 
-challongeApi.indexTournaments = function() {
-    return new Promise(function (resolve, reject) {
-        client.tournaments.index({
-            callback: function(err, data){
-                if (err) { console.log(err); reject("WHOOPS"); }
-                resolve(data);
-            }
-        });
-    });
-};
+challongeApi.indexTournaments = function () {
+  return new Promise(function (resolve, reject) {
+    client.tournaments.index({
+      callback: function (err, data) {
+        if (err) { console.log(err); return ('whoops') }
+        resolve(data)
+      }
+    })
+  })
+}
 
-challongeApi.showTournament = function(t_id) {
-    return new Promise(function (resolve, reject) {
-        client.tournaments.show({
-            id :    t_id,
-            callback: function(err, data){
-                if (err) { console.log(err); reject("WHOOPS"); }
-                resolve(data);
-            }
-        });
-    });
-};
+challongeApi.showTournament = function (t_id) {
+  return new Promise(function (resolve, reject) {
+    client.tournaments.show({
+      id: t_id,
+      callback: function (err, data) {
+        if (err) { console.log(err); reject('WHOOPS') }
+        resolve(data)
+      }
+    })
+  })
+}
 
-/*--------------------PARTICIPANTS-----------------------*/
+/* --------------------PARTICIPANTS----------------------- */
 
-challongeApi.indexParticipants = function(t_id) {
-    return new Promise(function (resolve, reject) {
-        client.participants.index({
-            id : t_id,
-            callback: function(err, data){
-                if (err) { console.log(err); reject("WHOOPS"); }
-                resolve(data);
-            }
-        });
-    });
-};
+challongeApi.indexParticipants = function (t_id) {
+  return new Promise(function (resolve, reject) {
+    client.participants.index({
+      id: t_id,
+      callback: function (err, data) {
+        if (err) { console.log(err); reject('WHOOPS') }
+        resolve(data)
+      }
+    })
+  })
+}
 
-challongeApi.showParticipant = function(t_id, p_id) {
-    return new Promise(function (resolve, reject) {
-        client.participants.show({
-            id : t_id,
-            participantId : p_id,
-            callback: function(err, data){
-                if (err) { console.log(err); return; }
-                resolve(data);
-            }
-        });
-    });
-};
+challongeApi.showParticipant = function (t_id, p_id) {
+  return new Promise(function (resolve, reject) {
+    client.participants.show({
+      id: t_id,
+      participantId: p_id,
+      callback: function (err, data) {
+        if (err) { console.log(err); return }
+        resolve(data)
+      }
+    })
+  })
+}
 
-/*--------------------MATCHES-----------------------*/
+/* --------------------MATCHES----------------------- */
 
 // TODO:240 turn match api function wrapper wrappers into promises
 
-challongeApi.indexMatches = function(t_id, callback) {
-    client.matches.index({
-        id : t_id,
-        callback: function(err, data){
-            if (err) { console.log(err); return; }
-            callback(data);
-        }
-    });
-};
+challongeApi.indexMatches = function (t_id, callback) {
+  client.matches.index({
+    id: t_id,
+    callback: function (err, data) {
+      if (err) { console.log(err); return }
+      callback(data)
+    }
+  })
+}
 
-challongeApi.showMatch = function(t_id, m_id, callback) {
-    client.matches.show({
-        id :    t_id,
-        matchId : m_id,
-        callback: function(err, data){
-            if (err) { console.log(err); return; }
-            callback(data);
-        }
-    });
-};
+challongeApi.showMatch = function (t_id, m_id, callback) {
+  client.matches.show({
+    id: t_id,
+    matchId: m_id,
+    callback: function (err, data) {
+      if (err) { console.log(err); return }
+      callback(data)
+    }
+  })
+}
 
-module.exports = challongeApi;
+module.exports = challongeApi

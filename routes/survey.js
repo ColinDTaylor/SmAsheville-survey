@@ -11,8 +11,7 @@ router.get('/', (req, res) => {
     res.render('survey', {
       stylesheet: 'stylesheets/survey-styles.css',
       title: 'Zhwang!',
-      question_1: 'mushrooms?',
-      question_2: 'mushrooms.',
+      questions: ['Which player do you think improved most this season?', 'thest'],
       playerArray: eligiblePlayers,
       rankedArray: null
     })

@@ -29,15 +29,13 @@ function applyLocalFormData () {
   let unrankedContext = {inputArray: localStorage.getItem('player_list').split('|')}
   let rankingsContext = {inputArray: localStorage.getItem('ranking_list').split('|')}
 
-  console.log(listTemplate(rankingsContext))
+  // console.log(listTemplate(rankingsContext))
 
   document.getElementById('player_pool').innerHTML = listTemplate(unrankedContext)
   document.getElementById('ranking_list').innerHTML = listTemplate(rankingsContext)
 
   document.getElementById('tag').value = localStorage.getItem('tag')
 
-  document.getElementById('question_1').value = localStorage.getItem('question_1')
-  document.getElementById('question_2').value = localStorage.getItem('question_2')
 }
 
 // Makes sure that the local data (if any exists) matches the current player list
@@ -178,10 +176,9 @@ function tally () {
 }
 
 function parseListHTML (input) {
-  output = []
+  let output = []
 
   for (let node of input.childNodes) {
-
     if (node.className !== 'list_player') {
       continue
     }
@@ -211,9 +208,4 @@ function submitFormJSON (jsonData) {
 
 function saveTagString () {
   localStorage.setItem('tag', document.getElementById('tag').value)
-}
-
-function saveQuestionChoices () {
-  localStorage.setItem('question_1', document.getElementById('question_1').value)
-  localStorage.setItem('question_2', document.getElementById('question_2').value)
 }

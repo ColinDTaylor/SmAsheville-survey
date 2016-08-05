@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<!-- lol hi there, this was written by joseph for colin's pr software -->
-
-<!-- TODO: handelbarsify this -->
 <head>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
-    <link rel="stylesheet" href="../public/stylesheets/survey-styles.css">
+    {{!-- <link rel="stylesheet" href="../public/stylesheets/survey-styles.css"> --}}
     <!-- TODO: come up with a better way to pass playerArray into clientside -->
     <script>
         window.playerArray = "{{{playerArray}}}".split(",");
+        console.log(playerArray);
+
     </script>
+
 </head>
 
 <body onbeforeunload="unranked_sortable.save();">
@@ -53,21 +53,15 @@
 
         <h2 class="header">Additional Awards<br></h2>
 
-        <h2 class="item">{{question_1}}</h2>
-        <select class="pulldown" name="stuffs" id="question_1" onchange="saveQuestionChoices()">
-            <option></option>
-            {{#each playerArray}}
-                <option>{{this}}</option>
-            {{/each}}
-        </select>
-
-        <h2 class="item">{{question_2}}</h2>
-        <select class="pulldown" name="wowok" id="question_2" onchange="saveQuestionChoices()">
-            <option></option>
-            {{#each playerArray}}
-                <option>{{this}}</option>
-            {{/each}}
-        </select>
+        {{#each questions as |question|}}
+          <h2 class="item">{{question}}</h2>
+          <select class="pulldown" name="stuffs" id="question_{{@index}}" onchange="saveQuestionChoices()">
+              <option></option>
+              {{#each ../playerArray as |player|}}
+                  <option>{{player}}</option>
+              {{/each}}
+          </select>
+        {{/each}}
 
         <div class="breaker"></div>
         <div class="breaker"></div>
@@ -87,3 +81,16 @@
 <script src="javascripts/handlebars-v4.0.5.js"></script>
 <script src="javascripts/Sortable.js"></script>
 <script src="javascripts/survey.js"></script>
+<script>
+  {{#each questions}}
+    document.getElementById('question_{{@index}}').value = localStorage.getItem('question_{{@index}}')
+  {{/each}}
+</script>
+<script>
+  function saveQuestionChoices () {
+    // TODO: Make this less horrible
+    {{#each questions}}
+    localStorage.setItem('question_{{@index}}', document.getElementById('question_{{@index}}').value)
+    {{/each}}
+  }
+</script>

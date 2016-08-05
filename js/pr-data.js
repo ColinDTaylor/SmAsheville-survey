@@ -1,3 +1,5 @@
+// TODO: I think most of what this is currently doing can be accomplished by the queries module
+
 var aliasHandler = require('./alias-handler.js')
 var queries = require('./queries.js')
 // Module used to manipulate the data for use with the PR.
@@ -86,6 +88,7 @@ PrData.generateEligibility = function (season) {
     // console.log(eligibleAttendance.length)
     // console.log(attendance.length)
     // console.log(eligible.length)
+    // console.log(eligible)
     return eligible
   })
 }

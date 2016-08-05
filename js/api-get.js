@@ -2,7 +2,8 @@ var challongeApi = require('./api-basics.js')
 
 var stats = {}
 
-// TODO: clean this challonge data please, clean it gud
+// TODO: make these work on a time basis, not url
+// but then how would I differentiate doubles brackets from singles?
 
 stats.getTournaments = function (firstTournament, lastTournament) {
   var promiseArray = []
@@ -21,7 +22,6 @@ stats.getTournaments = function (firstTournament, lastTournament) {
     // for (var item of data) {
     //     item.tournament._id = 't_' + item.tournament.name.substring(11, 13)
     // }
-
     return data
   })
 }
