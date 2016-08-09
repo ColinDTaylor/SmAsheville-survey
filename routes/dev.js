@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var api = require('../js/api-get')
 var database = require('../js/mongoose-main').Operations
+var queries = require('../js/queries')
 
 router.get('/', (req, res, next) => {
   res.send('This dev url is for use by PRIME NERDS ONLY')
@@ -20,6 +21,13 @@ router.get('/populate-participants/:collectionName/:first/:last', (req, res, nex
     database.insertParticipants(data, req.params.collectionName).then(docs => {
       res.send('boots')
     })
+  })
+})
+
+router.get('/test', (req, res, next) => {
+  queries.getSeasonalAttendance().then(names => {
+    console.log(names)
+    res.send(names)
   })
 })
 

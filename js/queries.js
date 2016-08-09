@@ -80,4 +80,14 @@ Queries.getSeasonalSmallTournaments = function (season) {
     })
 }
 
+Queries.getSeasonalAttendance = function (season) {
+  return database.Participants
+  .find()
+  .where('createdAt').gt(Date('06/16/2016'))
+  .select('-_id name')
+  .exec().then(names => {
+    return names
+  })
+}
+
 module.exports = Queries

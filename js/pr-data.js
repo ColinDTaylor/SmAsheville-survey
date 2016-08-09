@@ -26,6 +26,7 @@ PrData.attendance = function () {
   let outputArray = []
   let playerIndex = 0
 
+  // TODO: make this use map() instead of for loops
   // use the big list to add all of the alias uses together to get one attendance number
   for (let player in aliasHandler.bigList) {
     outputArray[playerIndex] = [player, 0]
