@@ -116,7 +116,7 @@ Operations.insertParticipants = function (inputData, collectionName) {
 
 Operations.insertTournaments = function (inputData, collectionName) {
   let promiseArray = []
-  let model = mongoose.model('spring_2016.tournament', tournamentSchema)
+  let model = mongoose.model(collectionName, tournamentSchema)
 
   for (let tournament of inputData) {
     promiseArray.push(insertionPromise(tournament.tournament, model))
