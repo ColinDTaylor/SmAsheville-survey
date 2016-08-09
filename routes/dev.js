@@ -9,8 +9,10 @@ router.get('/', (req, res, next) => {
 
 router.get('/populate-tournaments/:collectionName/:first/:last', (req, res, next) => {
   api.getTournaments(req.params.first, req.params.last).then(data => {
-    // res.send(`tournaments successfully populated to collection '${req.params.collectionName}'
-                // ${data.toString()}`)
+    database.insertTournaments(data, req.params.collectionName).then(docs => {
+      console.log(docs)
+      res.send('shoes')
+    })
     console.log(data)
     res.send(data)
   })
