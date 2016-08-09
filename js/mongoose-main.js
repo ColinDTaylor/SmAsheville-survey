@@ -16,7 +16,7 @@ db.once('open', () => {
   console.log('we did it')
 })
 
-Operations.db = db
+// Operations.db = db
 /* ----------- Schemas ---------- */
 
 // TODO: make this not specific to spring 2016
@@ -81,7 +81,7 @@ let seasonSchema = new Schema({
 // TODO: move several of these models over to their respective functions
 // TODO: how can I make the collection used by these modular?
 Models.SurveyResponses = mongoose.model('Models.SurveyResponse', surveyResponseSchema)
-Models.Participants = mongoose.model('spring_2016.participant', participantSchema)
+Models.Participants = mongoose.model('whatsup', participantSchema)
 Models.Tournaments = mongoose.model('spring_2016.tournament', tournamentSchema)
 Models.Matches = mongoose.model('cleanTest.match', matchSchema)
 // let Top8Getter = mongoose.model('cleanTest.top8getter', top8GettersSchema)
@@ -99,8 +99,9 @@ Operations.logSurveyResponse = function (surveyData) {
 
 // NOTE: these are almost identical, but it almost seems like it's better to leave them separate
 // TODO: make some kinda function that combines this w/ stuff from api-get
+// TODO: make these work with map
 
-Operations.insertParticipants = function (inputData) {
+Operations.insertParticipants = function (inputData, collectionName) {
   let promiseArray = []
 
   for (let tournament of inputData) {
@@ -108,15 +109,14 @@ Operations.insertParticipants = function (inputData) {
       promiseArray.push(insertionPromise(participant.participant, Models.Participants))
     }
   }
-
-  return promiseArray
+  // console.log(promiseArray)
+  return Promise.all(promiseArray)
 }
 
-Operations.insertTournaments = function (inputData) {
+Operations.insertTournaments = function (inputData, collectionName) {
   let promiseArray = []
 
   for (let tournament of inputData) {
-    console.log(tournament)
     promiseArray.push(insertionPromise(tournament.tournament, Models.Tournaments))
   }
 

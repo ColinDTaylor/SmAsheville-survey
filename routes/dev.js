@@ -10,8 +10,8 @@ router.get('/', (req, res, next) => {
 router.get('/populate-tournaments/:collectionName/:first/:last', (req, res, next) => {
   api.getTournaments(req.params.first, req.params.last).then(data => {
     // res.send(`tournaments successfully populated to collection '${req.params.collectionName}'
-    //
-    //             ${data.toString()}`)
+                // ${data.toString()}`)
+    console.log(data)
     res.send(data)
   })
 })
@@ -19,6 +19,7 @@ router.get('/populate-tournaments/:collectionName/:first/:last', (req, res, next
 router.get('/populate-participants/:collectionName/:first/:last', (req, res, next) => {
   api.getParticipants(req.params.first, req.params.last).then(data => {
     database.insertParticipants(data).then(docs => {
+      console.log(docs)
       res.send('boots')
     })
   })
