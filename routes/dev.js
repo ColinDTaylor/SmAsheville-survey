@@ -13,8 +13,6 @@ router.get('/populate-tournaments/:collectionName/:first/:last', (req, res, next
       console.log(docs)
       res.send('shoes')
     })
-    console.log(data)
-    res.send(data)
   })
 })
 
