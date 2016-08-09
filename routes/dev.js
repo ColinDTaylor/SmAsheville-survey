@@ -18,12 +18,11 @@ router.get('/populate-tournaments/:collectionName/:first/:last', (req, res, next
 
 router.get('/populate-participants/:collectionName/:first/:last', (req, res, next) => {
   api.getParticipants(req.params.first, req.params.last).then(data => {
-    database.insertParticipants(data).then(docs => {
+    database.insertParticipants(data, req.params.collectionName).then(docs => {
       console.log(docs)
       res.send('boots')
     })
   })
 })
-
 
 module.exports = router

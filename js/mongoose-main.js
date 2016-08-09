@@ -103,27 +103,29 @@ Operations.logSurveyResponse = function (surveyData) {
 
 Operations.insertParticipants = function (inputData, collectionName) {
   let promiseArray = []
+  let model = mongoose.model(collectionName, participantSchema)
 
   for (let tournament of inputData) {
     for (let participant of tournament) {
-      promiseArray.push(insertionPromise(participant.participant, Models.Participants))
+      promiseArray.push(insertionPromise(participant.participant, model))
     }
   }
-  // console.log(promiseArray)
+
   return Promise.all(promiseArray)
 }
 
 Operations.insertTournaments = function (inputData, collectionName) {
   let promiseArray = []
+  let model = mongoose.model('spring_2016.tournament', tournamentSchema)
 
   for (let tournament of inputData) {
-    promiseArray.push(insertionPromise(tournament.tournament, Models.Tournaments))
+    promiseArray.push(insertionPromise(tournament.tournament, model))
   }
 
   return promiseArray
 }
 
-Operations.insertMatches = function (inputData) {
+Operations.insertMatches = function (inputData, collectionName) {
   let promiseArray = []
 
   for (let tournament of inputData) {
