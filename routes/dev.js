@@ -10,7 +10,6 @@ router.get('/', (req, res, next) => {
 router.get('/populate-tournaments/:collectionName/:first/:last', (req, res, next) => {
   api.getTournaments(req.params.first, req.params.last).then(data => {
     database.insertTournaments(data, req.params.collectionName).then(docs => {
-      console.log(docs)
       res.send('shoes')
     })
   })
@@ -19,7 +18,6 @@ router.get('/populate-tournaments/:collectionName/:first/:last', (req, res, next
 router.get('/populate-participants/:collectionName/:first/:last', (req, res, next) => {
   api.getParticipants(req.params.first, req.params.last).then(data => {
     database.insertParticipants(data, req.params.collectionName).then(docs => {
-      console.log(docs)
       res.send('boots')
     })
   })
