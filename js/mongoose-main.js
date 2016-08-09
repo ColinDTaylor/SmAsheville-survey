@@ -122,7 +122,7 @@ Operations.insertTournaments = function (inputData, collectionName) {
     promiseArray.push(insertionPromise(tournament.tournament, model))
   }
 
-  return promiseArray
+  return Promise.all(promiseArray)
 }
 
 Operations.insertMatches = function (inputData, collectionName) {
@@ -135,7 +135,7 @@ Operations.insertMatches = function (inputData, collectionName) {
     }
   }
 
-  return promiseArray
+  return Promise.all(promiseArray)
 }
 
 function insertionPromise (inputData, inputModel) {
