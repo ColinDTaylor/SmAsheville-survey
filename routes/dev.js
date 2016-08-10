@@ -24,10 +24,11 @@ router.get('/populate-participants/:collectionName/:first/:last', (req, res, nex
   })
 })
 
-router.get('/test', (req, res, next) => {
-  queries.getSeasonalAttendance().then(names => {
-    console.log(names)
-    res.send(names)
+router.get('/getEligibility', (req, res, next) => {
+  queries.HorribleMonsterEligibilityFunction().then(eligibility => {
+    console.log(eligibility.ranking)
+
+    res.send('<pre>' + eligibility.ranking.join('\n') + '</pre>')
   })
 })
 

@@ -66,6 +66,7 @@ Queries.getSeasonalTop8s = function (season) {
 // less than 16 participants. Input = same as getSeasonalTop8s + an active connecttion object
 // output = array of tournament IDs.
 
+// TODO: make these actually accept a season parameter
 Queries.getSeasonalSmallTournaments = function (season) {
   return database.Tournaments
     .find()
@@ -80,13 +81,91 @@ Queries.getSeasonalSmallTournaments = function (season) {
     })
 }
 
-Queries.getSeasonalAttendance = function (season) {
+Queries.getSeasonalTotalAttendance = function (season) {
   return database.Participants
-  .find()
-  .where('createdAt').gt(Date('06/16/2016'))
-  .select('-_id name')
+  .aggregate()
+  .append({$project: {_id: 0, name: 1}})
+  .group({_id: '$name', count: {$sum: 1}})
+  .sort({count: -1})
   .exec().then(names => {
     return names
+  })
+}
+
+// Generates an array of objects which have an "_id" corresponding to each month of the season,
+// alongside a set of unique tags representing ever person that entrered a weekly that season.
+Queries.getSeasonalMonthlyAttendance = function () {
+  return database.Participants
+  .aggregate()
+  .append({$project: {_id: 0, name: 1, id: 1, createdAt: 1}})
+  .group({
+    _id: {$month: '$createdAt'},
+    tags: {$addToSet: '$name'}
+  })
+  .exec().then(result => {
+    let monthsActive = {}
+
+    // create an object of arrays from our array of objects (hah), one array for each month in the
+    // season. The arrays contain only one copy of each cleaned alias.
+
+    // hmm, it'd be much easier to work with this if it was an array of names which have each
+    // season they entered pushed into them.
+
+    result.map((doc) => {
+      doc.tags.map((name) => {
+        let cleanedName = aliasHandler.lookupAlias(name)
+
+        if (!monthsActive[cleanedName]) {
+          // if the array of seasons does not exist yet, make it.
+          monthsActive[cleanedName] = []
+          monthsActive[cleanedName].push(doc._id)
+        } else if (!monthsActive[cleanedName].includes(doc._id)) {
+          // push this season into the array of seasons, unless it's already there.
+          monthsActive[cleanedName].push(doc._id)
+        }
+      })
+    })
+    return monthsActive
+  })
+}
+
+Queries.HorribleMonsterEligibilityFunction = function () {
+  return Queries.getSeasonalMonthlyAttendance().then(docs => {
+    let attendance = {
+      active: [],
+      inactive: []
+    }
+
+    for (let player in docs) {
+      if (docs[player].length >= 4) {
+        attendance.active.push(player)
+      } else if (!docs[player].includes(3) && docs[player].length === 3) {
+        attendance.active.push(player)
+      } else {
+        attendance.inactive.push(player)
+      }
+    }
+    return attendance
+  }).then(attendance => {
+    let eligibility = {
+      attendance: attendance.active,
+      ineligible: {
+        inactive: attendance.inactive,
+        noTop8: []
+      },
+      ranking: []
+    }
+
+    return Queries.getSeasonalTop8s().then(top8s => {
+      for (let person of attendance.active) {
+        if (top8s.includes(person)) {
+          eligibility.ranking.push(person)
+        } else {
+          eligibility.ineligible.noTop8.push(person)
+        }
+      }
+      return eligibility
+    })
   })
 }
 

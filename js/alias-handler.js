@@ -2,7 +2,7 @@
 // individual players are separated by blank lines
 
 // This season's alias list created manually because it had to be.
-var Aliases = {};
+var Aliases = {}
 
 // TODO:200 store this list in the mongoDB and then grab it
 // TODO:90 make an alias list generator that uses and displays seasonal data
@@ -10,349 +10,408 @@ var Aliases = {};
 
 // The big list of historical tag aliases for each SmAsheville player
 Aliases.bigList = {
-    "Vasculinity" : {
-        "Meat" : 12
-    },
+  'Dubs': {
+    'Dubs': 0
+  },
 
-    "Ryko" : {
-        "Ryko" : 12
-    },
+  'Satchel': {
+    'Satchel': 2
+  },
 
-    "tenbutts" : {
-        "tenbutts" : 12,
-        "tenbuttsonethumb" : 1
-    },
+  'Ethen': {
+    'Ethen': 1
+  },
 
-    "Weis" : {
-        "Weis" : 11
-    },
+  'KSAV': {
+    'KSAV': 1
+  },
 
-    "Cold" : {
-        "Cold" : 10
-    },
+  'Botch': {
+    'Botch': 1
+  },
 
-    "Absolome" : {
-        "s.L | Absolome" : 10,
-        "Absolome" : 2
-    },
+  'Paul': {
+    'Paul': 1
+  },
 
-    "Welcome" : {
-        "Welcome" : 8
-    },
+  'CRBN': {
+    'CRBN': 1
+  },
 
-    "Nips" : {
-        "Nips" : 7
-    },
+  'Squee': {
+    'Squee': 1
+  },
 
-    "):" : {
-        "s.L | ):" : 7,
-        "s.L | Crohny" : 4,
-        "):" : 1
-    },
+  'Aner': {
+    'Aner': 1
+  },
 
-    "Avacado" : {
-        "Avagadro" : 7,
-        "Boo (Avagadro)" : 3,
-        "Squirrel" : 1
-    },
+  'Crane': {
+    'Crane': 1
+  },
 
-    "Savage Henry" : {
-        "Savage Henry" : 6,
-        "No Tech Ninja" : 2,
-        "Wesley" : 1
-    },
+  '60%CAT': {
+    '60%CAT': 2,
+    '60%cat': 1
+  },
 
-    "Ted Greene" : {
-        "Ted Greene" : 6
-    },
+  'CrumJ': {
+    'CrumJ': 1
+  },
 
-    "Z" : {
-        "Z": 5
-    },
+  'Vasculinity': {
+    'Meat': 16
+  },
 
-    "Simmons" : {
-        "Simmons" : 5
-    },
+  'Ryko': {
+    'Ryko': 18
+  },
 
-    "Cloudsquall" : {
-        "Cloudsquall" : 5
-    },
+  'tenbutts': {
+    'tenbutts': 18,
+    'tenbuttsonethumb': 1
+  },
 
-    "Ethereal" : {
-        "Ethereal" : 5
-    },
+  'Weis': {
+    'Weis': 16
+  },
 
-    "Gravity" : {
-        "Gravity" : 5
-    },
+  'Cold': {
+    'Cold': 15,
+    'NerveDamage | Cold': 1
+  },
 
-    "Cloud" : {
-        "Cloud" : 5,
-        "w33b" : 1
-    },
+  'Absolome': {
+    's.L | Absolome': 16,
+    'Absolome': 2
+  },
 
-    "BTOD" : {
-        "BTOD" : 4,
-        "BTODD" : 1
-    },
+  'Welcome': {
+    'Welcome': 10
+  },
 
-    "v4extreme" : {
-        "v4extreme" : 4
-    },
+  'Nips': {
+    'Nips': 8
+  },
 
-    "Pants" : {
-        "pants" : 4
-    },
+  '):': {
+    's.L | :(': 1,
+    's.L | ):': 12,
+    's.L | Crohny': 4,
+    '):': 1
+  },
 
-    "QueTPie" : {
-        "Que T Pie" : 4,
-        "QueTPie" : 2,
-    },
+  'Avacado': {
+    'Avacado': 6,
+    'Avagadro': 7,
+    'Boo (Avagadro)': 3,
+    'Squirrel (Avagadro)': 1
+  },
 
-    "ETMIV" : {
-        "ETMIV" : 3
-    },
+  'Savage Henry': {
+    'Savage Henry': 7,
+    'No Tech Ninja': 2,
+    'Wesley': 1
+  },
 
-    "Clint" : {
-        "Banjo" : 3,
-        "Low Key Furry (clint)" : 1,
-        "Sithlord Steve Buscemi" : 1,
-        "Low-Key Donald Trump Fan (Clint)" : 1,
-        "The Gay Agenda" : 1,
-        "Clint" : 1,
-        "Dickmaster" : 1,
-        "Dick Master" : 1,
-        "DJ Windows 98" : 1
-    },
+  'Ted Greene': {
+    'Ted Greene': 6
+  },
 
-    "Buster Bluth" : {
-        "Buster Bluth" : 1,
-    },
+  'Z': {
+    'Z': 8
+  },
 
-    "DJAK" : {
-        "DJAK" : 1
-    },
+  'Simmons': {
+    'Simmons': 7
+  },
 
-    "Bly" : {
-        "Bly" : 1
-    },
+  'Cloudsquall': {
+    'Cloudsquall': 8
+  },
 
-    "TBA" : {
-        "TBA" : 1
-    },
+  'Ethereal': {
+    'Ethereal': 5
+  },
 
-    "401k" : {
-        "401k" : 1
-    },
+  'Gravity': {
+    'Gravity': 10
+  },
 
-    "Nimbus" : {
-        "s.L | Nimbus" : 3
-    },
+  'Cloud': {
+    'Cloud': 11,
+    'W33b (Cloud)': 1
+  },
 
-    "EZVega" : {
-        "HYP | EZVega" : 3
-    },
+  'BTOD': {
+    'BTOD': 7,
+    'BTODD': 1
+  },
 
-    "D'embeaux" : {
-        "D'embeuax" : 3,
-        "Dembo" : 2,
-        "D'embeaux" : 1,
-        "$-85 (dembo)" : 1
-    },
+  'v4extreme': {
+    'v4extreme': 4
+  },
 
-    "Kun$" : {
-        "Kun$" : 3
-    },
+  'Pants': {
+    'pants': 9
+  },
 
-    "Pelipper" : {
-        "PPP | Wingull" : 3,
-        "Ppeliper" : 2,
-        "Pppelliper" : 1,
-        "Ppppelipper" : 1
-    },
+  'QueTPie': {
+    'Que T Pie': 4,
+    'QueTPie': 2
+  },
 
-    "Shinryu" : {
-        "Shinryu" : 2,
-        "Shinyu" : 1
-    },
+  'ETMIV': {
+    'ETMIV': 4
+  },
 
-    "N7" : {
-        "N7" : 2
-    },
+  'Clint': {
+    'Banjo': 3,
+    'Low Key Furry (clint)': 1,
+    'Sithlord Steve Buscemi': 1,
+    'Low-Key Donald Trump Fan (Clint)': 1,
+    'The Gay Agenda': 1,
+    'Clint': 1,
+    'Dickmaster': 1,
+    'Dick Master': 1,
+    'DJ Windows 98': 1,
+    'Jorts Jones most wanted (clint)': 1,
+    'Jorts Jones (Clint)': 1,
+    'SELFINFLICTEDBONER (clint)': 1,
+    'Anime Jesus (Clint)': 1
+  },
 
-    "Shib" : {
-        "Shib" : 2
-    },
+  'Buster Bluth': {
+    'Buster Bluth': 1
+  },
 
-    "Golm" : {
-        "Golm" : 2
-    },
+  'DJAK': {
+    'DJAK': 1
+  },
 
-    "Dub" : {
-        "Dub" : 2
-    },
+  'Bly': {
+    'Bly': 1
+  },
 
-    "Lime" : {
-        "Lime" : 2
-    },
+  'TBA': {
+    'TBA': 1
+  },
 
-    "Tate" : {
-        "Tate" : 1
-    },
+  '401k': {
+    '401k': 2
+  },
 
-    "WhispySunnypines" : {
-        "Whispysunnypines" : 1,
-        "Wispy Sunnypyines" : 1,
-        "Whispy Sunnypines" : 1,
-        "Wispy Sunnypines" : 1,
-        "Jeri" : 1
-    },
+  'Nimbus': {
+    's.L | Nimbus': 5
+  },
 
-    "Nemé" : {
-        "Nené" : 1
-    },
+  'EZVega': {
+    'HYP | EZVega': 5
+  },
 
-    "MP" : {
-        "MP" : 1
-    },
+  "D'embeaux": {
+    "D'embeuax": 3,
+    'Dembo': 2,
+    "D'embeaux": 1,
+    '$-85 (dembo)': 1
+  },
 
-    "Jada" : {
-        "Jada" : 1
-    },
+  'Kun$': {
+    'Kun$': 3
+  },
 
-    "Treeborn" : {
-        "Treeborn": 1
-    },
+  'Pelipper': {
+    'PPP | Wingull': 3,
+    'Wingull': 1,
+    'Ppeliper': 2,
+    'Pppelliper': 1,
+    'Ppppelipper': 1
+  },
 
-    "Loudpackmatt" : {
-        "Loudpackmatt" : 1,
-        "Phat Merris" : 1
-    },
+  'Shinryu': {
+    'Shinryu': 2,
+    'Shinyu': 1
+  },
 
-    "NEG | TS3D" : {
-        "NEG | TS3D" : 1
-    },
+  'N7': {
+    'N7': 2
+  },
 
-    "Drevis2" : {
-        "AxP | Drevis2" : 1
-    },
+  'Shib': {
+    'Shib': 2
+  },
 
-    "PJBleu": {
-        "PJBleu" : 1
-    },
+  'Golm': {
+    'Golm': 2
+  },
 
-    "Foot" : {
-        "Foot" : 1
-    },
+  'Dub': {
+    'Dub': 3,
+    'Snake Cream Dubs': 1,
+    'Snake Cream': 1
+  },
 
-    "ccat" : {
-        "Ccat": 1
-    },
+  'Lime': {
+    'Lime': 2
+  },
 
-    "Zeloft" : {
-        "Zeloft": 1
-    },
+  'Tate': {
+    'Tate': 1
+  },
 
-    "Flare" : {
-        "Flare" : 1
-    },
+  'WhispySunnypines': {
+    'Whispysunnypines': 1,
+    'Wispy Sunnypyines': 1,
+    'Whispy Sunnypines': 1,
+    'Wispy Sunnypines': 1,
+    'Jeri': 1
+  },
 
-    "69HA" : {
-        "69ha" : 1
-    },
+  'Nemé': {
+    'Nené': 1
+  },
 
-    "Spooncer" : {
-        "Spooncer" : 1
-    },
+  'MP': {
+    'MP': 1
+  },
 
-    "Joey Bluntz": {
-        "Pat McCrory" : 1
-    },
+  'Jada': {
+    'Jada': 1
+  },
 
-    "Slimed" : {
-        "Slimed" : 1
-    },
+  'Treeborn': {
+    'Treeborn': 1
+  },
 
-    "LoZR" : {
-        "NEG | LoZR" : 1
-    },
+  'Loudpackmatt': {
+    'Loudpackmatt': 2,
+    'Phat Merris': 1
+  },
 
-    "Tumpummerbumbum" : {
-        "Tumpummerbumbum" : 1
-    },
+  'NEG | TS3D': {
+    'NEG | TS3D': 1
+  },
 
-    "Marcozimbabwe" : {
-        "Marcozimbabwe" : 1
-    }
-};
+  'Drevis2': {
+    'AxP | Drevis2': 1,
+    'Drevis2': 3
+  },
 
+  'PJBleu': {
+    'PJBleu': 1
+  },
+
+  'Foot': {
+    'Foot': 2
+  },
+
+  'ccat': {
+    'Ccat': 1
+  },
+
+  'Zeloft': {
+    'Zeloft': 1,
+    'zeloft': 1
+  },
+
+  'Flare': {
+    'Flare': 1
+  },
+
+  '69HA': {
+    '69ha': 1
+  },
+
+  'Spooncer': {
+    'Spooncer': 1
+  },
+
+  'Joey Bluntz': {
+    'Pat McCrory': 1
+  },
+
+  'Slimed': {
+    'Slimed': 1
+  },
+
+  'LoZR': {
+    'NEG | LoZR': 2
+  },
+
+  'Tumpummerbumbum': {
+    'Tumpummerbumbum': 1
+  },
+
+  'Marcozimbabwe': {
+    'Marcozimbabwe': 1
+  }
+}
 
 // TODO:50 fix all this case crap so that I don't need the patch on Object
-Aliases.lookupAlias = function(tagToFind, addIfNotFound = false, entryNumParam = 0) {
+Aliases.lookupAlias = function (tagToFind, addIfNotFound = false, entryNumParam = 0) {
+  // console.log(`Searching for ${tagToFind}...`)
+  // Check if the searched tag is on the outer level of the list.
+  if (Aliases.bigList.hasOwnProperty(tagToFind)) {
+    // console.log(`${tagToFind} found in database.`)
+    var playerObj = Aliases.bigList[tagToFind]
 
-    // console.log(`Searching for ${tagToFind}...`);
-    // Check if the searched tag is on the outer level of the list.
-    if (Aliases.bigList.hasOwnProperty(tagToFind)) {
-
-        // console.log(`${tagToFind} found in database.`);
-        var playerObj = Aliases.bigList[tagToFind];
-
-        // if this player object has no usual tag yet, set it to be the object's name.
-        // to be honest this is just to make the usual tag easier to access in later code.
-        if (!playerObj.usualTag) {
-            playerObj.usualTag = tagToFind;
-        }
-        // return with our found name.
-        // TODO:140 make this correct capitalization to use the one from the list.
-        return tagToFind;
+    // if this player object has no usual tag yet, set it to be the object's name.
+    // to be honest this is just to make the usual tag easier to access in later code.
+    if (!playerObj.usualTag) {
+      playerObj.usualTag = tagToFind
     }
+    // return with our found name.
+    // TODO:140 make this correct capitalization to use the one from the list.
+    return tagToFind
+  }
 
-    // Check each embedded player object's properties, if an alias is found return the usual tag.
-    for (var player in Aliases.bigList) {
-        if (player.toLowerCase() === tagToFind.toLowerCase) {
-            // console.log(`${tagToFind} found in database under a different capitalization.`);
-            return tagToFind;
-        }
-        // console.log(`checking ${player}`);
-        let playerObj = Aliases.bigList[player];
-
-        if (hasOwnPropertyCI(playerObj, tagToFind)) {
-            // if there is no usual tag, return the object's name (they should be identical anyways)
-            let trueName = playerObj.hasOwnProperty("usualTag") ? playerObj.usualTag : player;
-            // console.log(`${tagToFind} found as alias for ${trueName}`);
-            return trueName;
-        }
+  // Check each embedded player object's properties, if an alias is found return the usual tag.
+  for (var player in Aliases.bigList) {
+    if (player.toLowerCase() === tagToFind.toLowerCase) {
+      // console.log(`${tagToFind} found in database under a different capitalization.`)
+      return tagToFind
     }
+    // console.log(`checking ${player}`)
+    let playerObj = Aliases.bigList[player]
 
-    // If caller specifies, add the tag to the database with 0 entries OR specified # of entries
-    if (addIfNotFound) {
-        console.log(`'${tagToFind}' not found in the database, adding as new tag...`);
-        Aliases.bigList[tagToFind] = {
-            [tagToFind] : entryNumParam
-        };
-        return tagToFind;
+    if (hasOwnPropertyCI(playerObj, tagToFind)) {
+      // if there is no usual tag, return the object's name (they should be identical anyways)
+      let trueName = playerObj.hasOwnProperty('usualTag') ? playerObj.usualTag : player
+      // console.log(`${tagToFind} found as alias for ${trueName}`)
+      return trueName
     }
+  }
 
-    // Tag not found anywhere
-    console.log(`'${tagToFind}' not found in database.`);
-    throw Error('nooooo');
-};
+  // If caller specifies, add the tag to the database with 0 entries OR specified # of entries
+  if (addIfNotFound) {
+    console.log(`'${tagToFind}' not found in the database, adding as new tag...`)
+    Aliases.bigList[tagToFind] = {
+      [tagToFind]: entryNumParam
+    }
+    return tagToFind
+  }
+
+  // Tag not found anywhere
+  console.log(`'${tagToFind}' not found in database.`)
+  throw Error('nooooo')
+}
 
 // This function finds every non-standard alias in an array of tags and converts it to standard
 // if the standard is already in the array, the alias is removed. This means the array may come out
 // smaller than it was going in.
-Aliases.cleanAliasesInArray = function(inputArray) {
-    for (let tag of inputarray) {
-        console.log(tag);
-    }
-};
+// TODO: make this use .map()
+Aliases.cleanAliasesInArray = function (inputArray) {
+  for (let tag of inputArray) {
+    console.log(tag)
+  }
+}
 
-module.exports = Aliases;
+module.exports = Aliases
 
 // Tiny helper to give me a case insensitive version of hasOwnProperty
-hasOwnPropertyCI = function(obj, prop) {
-   return Object.keys(obj)
-          .filter(function (v) {
-             return v.toLowerCase() === prop.toLowerCase();
-           }).length > 0;
-};
+let hasOwnPropertyCI = function (obj, prop) {
+  return Object.keys(obj)
+      .filter(function (v) {
+        return v.toLowerCase() === prop.toLowerCase()
+      }).length > 0
+}

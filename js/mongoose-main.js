@@ -7,6 +7,8 @@ let Models = {}
 let Operations = {}
 let Exports = {}
 
+mongoose.Promise = global.Promise
+
 // TODO:260 update this to work with a more universal database name
 mongoose.connect('mongodb://localhost:27017/SmAsheville')
 
@@ -82,7 +84,7 @@ let seasonSchema = new Schema({
 // TODO: how can I make the collection used by these modular?
 Models.SurveyResponses = mongoose.model('Models.SurveyResponse', surveyResponseSchema)
 Models.Participants = mongoose.model('summer_2016.participant', participantSchema)
-Models.Tournaments = mongoose.model('spring_2016.tournament', tournamentSchema)
+Models.Tournaments = mongoose.model('summer_2016.tournament', tournamentSchema)
 Models.Matches = mongoose.model('cleanTest.match', matchSchema)
 // let Top8Getter = mongoose.model('cleanTest.top8getter', top8GettersSchema)
 
