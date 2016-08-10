@@ -59,6 +59,7 @@ PrData.attendance = function () {
   return outputArray
 }
 
+// NOTE: This is deprecated and replaced by queries.HorribleMonsterEligibilityFunction()
 PrData.generateEligibility = function (season) {
   // TODO:270 update to work cross-seasonally
   let attendance = PrData.attendance()

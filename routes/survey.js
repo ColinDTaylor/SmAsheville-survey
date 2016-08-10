@@ -2,17 +2,17 @@
 
 var express = require('express')
 var router = express.Router()
-var prData = require('../js/pr-data.js')
+var queries = require('../js/queries')
 var database_mongoose = require('../js/mongoose-main.js')
 
 /* GET survey page. */
 router.get('/', (req, res) => {
-  prData.generateEligibility('spring_2016').then(eligiblePlayers => {
+  queries.HorribleMonsterEligibilityFunction().then(eligibility => {
     res.render('survey', {
       stylesheet: 'stylesheets/survey-styles.css',
       title: 'Zhwang!',
       questions: ['Which player do you think improved most this season?', 'thest'],
-      playerArray: eligiblePlayers,
+      playerArray: eligibility.ranking,
       rankedArray: null
     })
   })

@@ -129,6 +129,7 @@ Queries.getSeasonalMonthlyAttendance = function () {
   })
 }
 
+// TODO: move this over to PRdata
 Queries.HorribleMonsterEligibilityFunction = function () {
   return Queries.getSeasonalMonthlyAttendance().then(docs => {
     let attendance = {
