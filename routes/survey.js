@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   queries.HorribleMonsterEligibilityFunction().then(eligibility => {
     res.render('survey', {
       stylesheet: 'stylesheets/survey-styles.css',
-      title: 'Zhwang!',
+      title: 'SmAsheville Power Rankings Survey',
       questions: ['Which player do you think improved most this season?'],
       playerArray: eligibility.ranking,
       attendedArray: eligibility.attendance,
