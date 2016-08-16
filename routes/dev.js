@@ -32,4 +32,12 @@ router.get('/getEligibility', (req, res, next) => {
   })
 })
 
+router.get('/jesus/thesedangnerds/iswearimactuallyalmostdone/ivebeensuperbusy/heresthevotinglist', (req, res, next) => {
+  queries.HorribleMonsterEligibilityFunction().then(eligibility => {
+    console.log(eligibility.ranking)
+
+    res.send('<pre>' + eligibility.ranking.join('\n') + '</pre>')
+  })
+})
+
 module.exports = router
