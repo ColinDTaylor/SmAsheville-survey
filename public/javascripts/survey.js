@@ -197,7 +197,8 @@ function parseListHTML (input) {
 }
 
 function submitFormJSON (jsonData) {
-  fetch('http://localhost:3000/survey', {
+  console.log('uh what')
+  fetch('http://ssbm.tech/survey', {
     method: 'post',
     headers: {
       'Accept': 'application/json',
