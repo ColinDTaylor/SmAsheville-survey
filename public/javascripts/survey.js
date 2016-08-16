@@ -213,3 +213,7 @@ function submitFormJSON (jsonData) {
 function saveTagString () {
   localStorage.setItem('tag', document.getElementById('tag').value)
 }
+
+function resetStorage () {
+  localStorage.clear()
+}
