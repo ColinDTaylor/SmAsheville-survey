@@ -26,9 +26,9 @@ let surveyResponseSchema = new Schema({
   tag: String,
   answers: [String],
   pr_list: [String],
-  unranked_players: [String],
-  ip_addr: String
-}, {collection: 'spring_2016.Models.SurveyResponses'})
+  unranked_players: [String]
+  // ip_addr: String
+}/*, {collection: 'spring_2016.Models.SurveyResponses'}*/)
 
 let participantSchema = new Schema({
   id: Number,
@@ -82,7 +82,7 @@ let seasonSchema = new Schema({
 /* ---------- Models ---------- */
 // TODO: move several of these models over to their respective functions
 // TODO: how can I make the collection used by these modular?
-Models.SurveyResponses = mongoose.model('Models.SurveyResponse', surveyResponseSchema)
+Models.SurveyResponses = mongoose.model('summer_2016.surveyResponse', surveyResponseSchema)
 Models.Participants = mongoose.model('summer_2016.participant', participantSchema)
 Models.Tournaments = mongoose.model('summer_2016.tournament', tournamentSchema)
 Models.Matches = mongoose.model('cleanTest.match', matchSchema)

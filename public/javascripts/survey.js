@@ -124,7 +124,9 @@ function default_settings (animationSpeed) {
     },
 
     // Element is removed from the list into another list
-    onRemove: function ( /**Event*/ evt) {},
+    onRemove: function ( /**Event*/ evt) {
+
+    },
 
     // Attempt to drag a filtered element
     onFilter: function ( /**Event*/ evt) {
@@ -144,7 +146,7 @@ function default_settings (animationSpeed) {
 }
 
 function tally () {
-  let debug_output = document.getElementById('debug')
+  // let debug_output = document.getElementById('debug')
 
   let unranked_list = document.getElementById('player_pool')
   let ranked_list = document.getElementById('ranking_list')
@@ -170,9 +172,11 @@ function tally () {
 
   let final_output = JSON.stringify(tally, null, ' ')
 
+  console.log(final_output)
+
   submitFormJSON(final_output)
 
-  debug_output.value = final_output
+  // debug_output.value = final_output
 }
 
 function parseListHTML (input) {

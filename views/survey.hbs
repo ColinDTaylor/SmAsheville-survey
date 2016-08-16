@@ -7,6 +7,8 @@
         window.playerArray = "{{{playerArray}}}".split(",");
         console.log(playerArray);
 
+        window.attendedArray = "{{{attendedArray}}}".split(",");
+        console.log(attendedArray);
     </script>
 
 </head>
@@ -34,7 +36,7 @@
         <!-- TODO: remove this inline style -->
         <div class="votewrapper">
             <div class="listbox players">
-                <h2 class="item">Player Pool<br><span style="font-size:10px">leave em' here 2 die</span></h2>
+                <h2 class="item">Player Pool<br><span style="font-size:10px">leave any unknown players here</span></h2>
                 <ul class="player_list" id="player_pool">
                     {{#each playerArray}}
                         <li class="list_player" data-id="{{this}}">
@@ -45,7 +47,7 @@
             </div>
             <!-- TODO: make the li elements in this list bigger -->
             <div class="listbox ranking">
-                <h2 class="item2">Final Ranks<br><span style="font-size:10px">place players ranked in order from best to worst here</span></h2>
+                <h2 class="item2">Final Ranks<br><span style="font-size:10px">place players ranked in order from most to least strong</span></h2>
                 <ul class=ranking_list id=ranking_list>
                 </ul>
             </div>
@@ -54,10 +56,10 @@
         <h2 class="header">Additional Awards<br></h2>
 
         {{#each questions as |question|}}
-          <h2 class="item">{{question}}</h2>
+          <h2 class="question_text">{{question}}</h2>
           <select class="pulldown" name="stuffs" id="question_{{@index}}" onchange="saveQuestionChoices()">
               <option></option>
-              {{#each ../playerArray as |player|}}
+              {{#each ../attendedArray as |player|}}
                   <option>{{player}}</option>
               {{/each}}
           </select>
@@ -66,16 +68,16 @@
         <div class="breaker"></div>
         <div class="breaker"></div>
         <div class="line"></div>
-        <button type="button" class="button" onclick="tally();window.location.href='/survey/thanks';">
+        <button type="button" class="button" onclick="tally();//window.location.href='/survey/thanks';">
             Submit
         </button>
         <div class="line"></div>
         <div class="breaker"></div>
         <div class="breaker"></div>
-        <h2><span style="font-size:10px">debug info...</span></h2>
+        {{!-- <h2><span style="font-size:10px">debug info...</span></h2>
         <textarea id="debug" rows="10" cols="30"></textarea>
         <div class="breaker"></div>
-        <div class="breaker"></div>
+        <div class="breaker"></div> --}}
     </div>
 </body>
 <script src="javascripts/handlebars-v4.0.5.js"></script>
