@@ -31,8 +31,19 @@ function applyLocalFormData () {
 
   // console.log(listTemplate(rankingsContext))
 
-  document.getElementById('player_pool').innerHTML = listTemplate(unrankedContext)
-  document.getElementById('ranking_list').innerHTML = listTemplate(rankingsContext)
+  // TODO: fix this horrible hacky solution to the "305" appearing bug
+
+  if (unrankedContext.inputArray[0] !== '') {
+    document.getElementById('player_pool').innerHTML = listTemplate(unrankedContext)
+  } else {
+    document.getElementById('player_pool').innerHTML = ''
+  }
+
+  if (rankingsContext.inputArray[0] !== '') {
+    document.getElementById('ranking_list').innerHTML = listTemplate(rankingsContext)
+  } else {
+    document.getElementById('ranking_list').innerHTML = ''
+  }
 
   document.getElementById('tag').value = localStorage.getItem('tag')
 
@@ -42,7 +53,6 @@ function applyLocalFormData () {
 function verifyLocalFormData () {
   let storedLists = new Set((localStorage.getItem('player_list').split('|').concat(
     localStorage.getItem('ranking_list').split('|'))))
-  console.log(storedLists)
 
   for (let player of window.playerArray) {
     if (storedLists.has(player)) {
@@ -197,7 +207,6 @@ function parseListHTML (input) {
 }
 
 function submitFormJSON (jsonData) {
-  console.log('uh what')
   fetch('http://ssbm.tech/survey', {
     method: 'post',
     headers: {
