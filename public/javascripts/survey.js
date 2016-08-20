@@ -1,7 +1,7 @@
 // TODO:60 fix how inconsistent all of the variable names are across here
 // TODO: fix up the answer-remembering, it's really ugly code right now
 window.onload = function () {
-  if (localStorage.getItem('data_version') !== '0.0.1') {
+  if (localStorage.getItem('data_version') !== '0.0.2') {
     localStorage.clear()
     localStorage.setItem('data_version', '0.0.1')
   }
