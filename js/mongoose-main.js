@@ -26,8 +26,8 @@ let surveyResponseSchema = new Schema({
   tag: String,
   answers: [String],
   pr_list: [String],
-  unranked_players: [String]
-  // ip_addr: String
+  unranked_players: [String],
+  ip_addr: String
 }/*, {collection: 'spring_2016.Models.SurveyResponses'}*/)
 
 let participantSchema = new Schema({
