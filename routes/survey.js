@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
   // TODO:10 add some kind of validation regex to the survey results
   // a kinda lazy way to add in an IP address to my data for future use
   // TODO: use this IP address to reload a player's previous selection
-  // req.body.ip_addr = req.ip
+  req.body.ip_addr = req.ip
 
   console.log(req.body)
 
