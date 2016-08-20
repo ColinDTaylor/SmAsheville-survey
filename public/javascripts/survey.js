@@ -1,6 +1,10 @@
 // TODO:60 fix how inconsistent all of the variable names are across here
 // TODO: fix up the answer-remembering, it's really ugly code right now
 window.onload = function () {
+  if (localStorage.getItem('data_version') !== '0.0.1') {
+    localStorage.clear()
+    localStorage.setItem('data_version', '0.0.1')
+  }
   // populate main list
   // <div class="item"><span class="my-handle">&nbsp;&#8801;&nbsp;</span>name</div>
   let unranked_list = document.getElementById('player_pool')
@@ -46,7 +50,6 @@ function applyLocalFormData () {
   }
 
   document.getElementById('tag').value = localStorage.getItem('tag')
-
 }
 
 // Makes sure that the local data (if any exists) matches the current player list
