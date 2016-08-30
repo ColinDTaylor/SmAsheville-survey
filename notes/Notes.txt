@@ -1,0 +1,16 @@
+System for lists:
+
+1. list must be from a player who was active this season
+  - reasons obvious, this list is the same as the one used for the most improved question
+
+2. list must not have a vanity score over 3 for #10-6, or 2 for #5-1
+  - vanity score = the offset of a players position on their own list compared to their spot on all acceptable lists averaged. Basically this rule stops a person from putting themselves super high and artificially bumping up their ranking
+
+3. list must not place any top 5 player in the bottom 5 spots
+  - this prevents any list from tanking a player's results artificially
+
+4. list must not leave out more than ~3 players
+  - note: number may change as I see how this works out
+
+5. list can't be literal, actual trash
+  - this rule should almost never be used. "trash" here just means that the PR panel looks at a list and decides that literally every single spot on the list is wrong. I'm talking like bottom 5 players in the top 5 spots and players that average the #5 spot being ranked #1
