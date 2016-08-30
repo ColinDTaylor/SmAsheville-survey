@@ -19,6 +19,6 @@ function getAttendance(coll) {
 }
 
 function handleLists(coll) {
-  let listObject = coll.find({}, {_id: 0, tag: 1, pr_list: 1, unranked_players: 1})
+  var listObject = coll.find({}, {_id: 0, tag: 1, pr_list: 1, unranked_players: 1})
   return listObject
 }
