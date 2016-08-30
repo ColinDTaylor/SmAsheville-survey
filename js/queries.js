@@ -170,4 +170,10 @@ Queries.HorribleMonsterEligibilityFunction = function () {
   })
 }
 
+Queries.getSurveylists = function () {
+  return database.SurveyResponses
+  .find()
+  .select('-_id tag unranked_players pr_list')
+}
+
 module.exports = Queries

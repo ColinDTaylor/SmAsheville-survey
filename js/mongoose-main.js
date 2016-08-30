@@ -82,7 +82,7 @@ let seasonSchema = new Schema({
 /* ---------- Models ---------- */
 // TODO: move several of these models over to their respective functions
 // TODO: how can I make the collection used by these modular?
-Models.SurveyResponses = mongoose.model('summer_2016.surveyResponse', surveyResponseSchema)
+Models.SurveyResponses = mongoose.model('summer_2016.surveyresponse', surveyResponseSchema)
 Models.Participants = mongoose.model('summer_2016.participant', participantSchema)
 Models.Tournaments = mongoose.model('summer_2016.tournament', tournamentSchema)
 Models.Matches = mongoose.model('cleanTest.match', matchSchema)

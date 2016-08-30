@@ -103,6 +103,14 @@ PrData.notableWins = function (input) {}
 
 PrData.notableLosses = function (input) {}
 
+PrData.handleLists = function () {
+  // TODO: set this function up to actually accupt an input
+
+  return queries.getSurveylists().then(data => {
+    return data
+  })
+}
+
 module.exports = PrData
 
 // PrData. = function(input) {

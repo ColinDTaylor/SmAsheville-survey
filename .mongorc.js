@@ -21,4 +21,5 @@ function getAttendance(coll) {
 function handleLists(coll) {
   var listObject = coll.find({}, {_id: 0, tag: 1, pr_list: 1, unranked_players: 1})
   return listObject
+  // Wait, this can't use ES6. I'll just write this in JS haha
 }

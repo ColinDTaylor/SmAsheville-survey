@@ -3,6 +3,7 @@ var router = express.Router()
 var api = require('../js/api-get')
 var database = require('../js/mongoose-main').Operations
 var queries = require('../js/queries')
+var prdata = require('../js/pr-data.js')
 
 router.get('/', (req, res, next) => {
   res.send('This dev url is for use by PRIME NERDS ONLY')
@@ -37,6 +38,18 @@ router.get('/jesus/thesedangnerds/iswearimactuallyalmostdone/ivebeensuperbusy/he
     console.log(eligibility.ranking)
 
     res.send('<pre>' + eligibility.ranking.join('\n') + '</pre>')
+  })
+})
+
+router.get('/test', (req, res, next) => {
+  prdata.handleLists().then(rawData => {
+    let output = ''
+
+    for (let list of rawData) {
+      output += (`${list.pr_list.join(' > ')} \n`)
+    }
+
+    res.send(output)
   })
 })
 
