@@ -46,7 +46,7 @@ router.get('/test', (req, res, next) => {
     let output = ''
 
     for (let list of rawData) {
-      output += (list.pr_list.join(' > ') + '\n')
+      output += (`${list.pr_list.join(' > ')} \n\n`)
     }
 
     res.send(output)
