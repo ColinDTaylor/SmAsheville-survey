@@ -54,17 +54,4 @@ router.get('/test', (req, res, next) => {
   })
 })
 
-router.get('/test/p', (req, res, next) => {
-  prdata.handleLists().then(rawData => {
-    // TODO: add this to a real, permanent function
-    let output = ''
-
-    for (let list of rawData) {
-      output += (`${list.tag} : ${list.pr_list.join(' > ')} \n\n`)
-    }
-
-    res.render('dev', {testData: output})
-  })
-})
-
 module.exports = router
