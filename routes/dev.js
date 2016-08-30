@@ -49,7 +49,7 @@ router.get('/test', (req, res, next) => {
       output += (`${list.pr_list.join(' > ')} \n\n`)
     }
 
-    res.send(output)
+    res.render('dev', {testData: output})
   })
 })
 
