@@ -10,6 +10,7 @@ var users = require('./routes/users')
 var stats = require('./routes/stats')
 var survey = require('./routes/survey')
 var dev = require('./routes/dev')
+var checker = require('./routes/checker')
 
 var app = express()
 
@@ -31,6 +32,8 @@ app.use('/users', users)
 app.use('/stats', stats)
 app.use('/survey', survey)
 app.use('/dev', dev)
+app.use('/checker', checker)
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   var err = new Error('Not Found')

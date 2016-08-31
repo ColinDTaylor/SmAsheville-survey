@@ -9,7 +9,7 @@ System for lists:
 3. list must not place any top 5 player in the bottom 5 spots
   - this prevents any list from tanking a player's results artificially
 
-4. list must not leave out more than ~3 players
+4. list must not leave out more than ~4 players
   - note: number may change as I see how this works out
 
 5. list can't be literal, actual trash

@@ -1,0 +1,8 @@
+Notes for remaking the project, neater
+
+make sure that the challonge api implementation is cleaner
+less useless "clutter" routes
+better ES6 usage
+maybe I could try out jade templates?
+
+make the alias handler on the DB and keep it there
