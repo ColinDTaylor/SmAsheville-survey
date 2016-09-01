@@ -81,26 +81,28 @@ challongeApi.showParticipant = function (t_id, p_id) {
 
 /* --------------------MATCHES----------------------- */
 
-// TODO:240 turn match api function wrapper wrappers into promises
-
-challongeApi.indexMatches = function (t_id, callback) {
-  client.matches.index({
-    id: t_id,
-    callback: function (err, data) {
-      if (err) { console.log(err); return }
-      callback(data)
-    }
+challongeApi.indexMatches = function (t_id) {
+  return new Promise((resolve, reject) => {
+    client.matches.index({
+      id: t_id,
+      callback: function (err, data) {
+        if (err) { console.log(err); reject('WHOOPS') }
+        resolve(data)
+      }
+    })
   })
 }
 
-challongeApi.showMatch = function (t_id, m_id, callback) {
-  client.matches.show({
-    id: t_id,
-    matchId: m_id,
-    callback: function (err, data) {
-      if (err) { console.log(err); return }
-      callback(data)
-    }
+challongeApi.showMatch = function (t_id, m_id) {
+  return new Promise((resolve, reject) => {
+    client.matches.show({
+      id: t_id,
+      matchId: m_id,
+      callback: function (err, data) {
+        if (err) { console.log(err); reject('WHOOPS') }
+        resolve(data)
+      }
+    })
   })
 }
 

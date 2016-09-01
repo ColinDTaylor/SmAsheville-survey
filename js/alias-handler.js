@@ -349,10 +349,8 @@ Aliases.bigList = {
 
 // TODO:50 fix all this case crap so that I don't need the patch on Object
 Aliases.lookupAlias = function (tagToFind, addIfNotFound = false, entryNumParam = 0) {
-  // console.log(`Searching for ${tagToFind}...`)
   // Check if the searched tag is on the outer level of the list.
   if (Aliases.bigList.hasOwnProperty(tagToFind)) {
-    // console.log(`${tagToFind} found in database.`)
     var playerObj = Aliases.bigList[tagToFind]
 
     // if this player object has no usual tag yet, set it to be the object's name.
@@ -368,16 +366,15 @@ Aliases.lookupAlias = function (tagToFind, addIfNotFound = false, entryNumParam 
   // Check each embedded player object's properties, if an alias is found return the usual tag.
   for (var player in Aliases.bigList) {
     if (player.toLowerCase() === tagToFind.toLowerCase) {
-      // console.log(`${tagToFind} found in database under a different capitalization.`)
       return tagToFind
     }
-    // console.log(`checking ${player}`)
+
     let playerObj = Aliases.bigList[player]
 
     if (hasOwnPropertyCI(playerObj, tagToFind)) {
       // if there is no usual tag, return the object's name (they should be identical anyways)
       let trueName = playerObj.hasOwnProperty('usualTag') ? playerObj.usualTag : player
-      // console.log(`${tagToFind} found as alias for ${trueName}`)
+
       return trueName
     }
   }
@@ -393,7 +390,7 @@ Aliases.lookupAlias = function (tagToFind, addIfNotFound = false, entryNumParam 
 
   // Tag not found anywhere
   console.log(`'${tagToFind}' not found in database.`)
-  throw Error('nooooo')
+  return tagToFind
 }
 
 // This function finds every non-standard alias in an array of tags and converts it to standard
