@@ -23,9 +23,9 @@ Checker.create = function (oldTournament, newTournament) {
     this.old.matchTable = createMatchTable(this.old)
     this.new.matchTable = createMatchTable(this.new)
 
-    // findConflicts(this.new.matchTable1, this.old.matchTable2)
+    return findConflicts(this.new, this.old)
 
-    return 'butz'
+    // return this
   })
 }
 
@@ -48,7 +48,7 @@ function getData (oldTournament, newTournament) {
   return Promise.all(promiseArray)
 }
 
-// inputData = an object with two sub-objects, one for participants and one for tournaments
+// tournament = an object with two sub-objects, one for participants and one for matches
 function associateIds (participants) {
   let output = {}
   output.highSeeds = []
@@ -56,7 +56,15 @@ function associateIds (participants) {
 
   participants.map(doc => {
     let part = doc.participant
-    output[part.id] = aliasHandler.lookupAlias(part.name)
+    let fixedTag = aliasHandler.lookupAlias(part.name)
+
+    if (fixedTag) {
+      output[part.id] = fixedTag
+    } else {
+      output[part.id] = part.name
+      output.unknowns ? output.unknowns.push(part.name) : output.unknowns = [part.name]
+    }
+
     if ([1, 2].includes(part.seed)) {
       output.highSeeds.push(part.id)
     }
@@ -65,28 +73,65 @@ function associateIds (participants) {
   return output
 }
 
-function createMatchTable (inputData) {
-  let output = {'1': [], '2': [], '-1': [], 'all': []}
-  let ids = inputData.idTable
-  let highSeeds = ids.highSeeds
-
-  inputData.matches.map(item => {
+function createMatchTable (tournament) {
+  let output = {'all': [], 'strings': []}
+  let ids = tournament.idTable
+  tournament.matches.map((item) => {
     let match = item.match
     let [p1Id, p2Id] = [match.player1Id, match.player2Id]
+    // all of the positive rounds are -1 here to clear up confusion about r3 being kinda really r2
+    let round = match.round >= 0 ? match.round - 1 : match.round
+    let roundsChecked
 
-    // If our bracket isn't a perfect power of 2
-    let roundsChecked = powerOf2(ids.participantCount) ? [1, 2, -1] : [1, 2, 3, -1]
+    // If our bracket isn't a perfect power of 2, look at round 3 and -2 also
+    // If it's halfway between two powers of 2, ignore -2 (loser's only has one r1 then)
 
-    if (roundsChecked.includes(match.round)) {
+    switch (bracketType(ids.participantCount)) {
+      case 'round': roundsChecked = [0, 1, -1]; break
+      case 'half round': roundsChecked = [0, 1, 2, -1]; break
+      case 'not round': roundsChecked = [0, 1, 2, -1, -2]; break
+    }
+
+    if (roundsChecked.includes(round)) {
       let players = []
+
       players.push(ids[p1Id])
       players.push(ids[p2Id])
-      output[match.round].push(players.sort().join(' vs '))
-      output.all.push(players.sort().join(' vs '))
 
-      if (highSeeds.includes(match.player1Id) || highSeeds.includes(match.player2Id)) {
-        console.log(ids[p1Id] + ' vs ' + ids[p2Id])
-      }
+      // The match arrays all need to be in the same order so they can be compared
+      let matchArray = players.sort()
+
+      output.strings.push(matchArray.join(' vs '))
+
+      matchArray.push(round)
+
+      output.all.push(matchArray)
+
+      // If output already has an array for this round, push the match array to it
+      // If the array doesn't alreay exist, make it and add the match array
+      output[round] ? output[round].push(matchArray) : output[round] = [matchArray]
+    }
+  })
+
+  return output
+}
+
+function getTopSeedsOpponents (tournament) {
+  let output = []
+  let ids = tournament.idTable
+  let highSeeds = ids.highSeeds
+
+  highSeeds.map((id, index) => {
+    highSeeds[index] = ids[id]
+  })
+
+  tournament.matchTable.all.map(match => {
+    let [p1, p2] = [match[0], match[1]]
+
+    if (highSeeds.includes(p1)) {
+      output.push(p2)
+    } else if (highSeeds.includes(p2)) {
+      output.push(p1)
     }
   })
 
@@ -94,8 +139,55 @@ function createMatchTable (inputData) {
 }
 
 // TODO next: compare the match tables for repeat fights
-function findConflicts (newMatchTable, oldMatchTable) {
+function findConflicts (newTournament, oldTournament) {
+  let output = {conflicts: []}
+  let newScrewedPlayers = getTopSeedsOpponents(newTournament)
+  let oldScrewedPlayers = getTopSeedsOpponents(oldTournament)
+  let [newMatches, oldMatches] = [newTournament.matchTable, oldTournament.matchTable]
+  let [newIdTable, oldIdTable] = [newTournament.idTable, oldTournament.idTable]
+  let allUnknowns = []
 
+  // TODO: make this nicer
+  if (newIdTable.unknowns) {
+    allUnknowns = allUnknowns.concat(newIdTable.unknowns)
+    if (oldIdTable.unknowns) {
+      allUnknowns = allUnknowns.concat(oldIdTable.unknowns)
+    }
+  }
+
+  if (allUnknowns.length) {
+    output.unknowns = allUnknowns.join(', ')
+  }
+
+  for (let matchIndex in newMatches.strings) {
+    let match = newMatches.strings[matchIndex]
+    let matchArray = newMatches.all[matchIndex]
+
+    if (oldMatches.strings.includes(match)) {
+      let round = matchArray[2]
+      let roundString = round >= 0 ? `winners r${round}` : `losers r${round}`
+
+      output.conflicts.push(`${match} happened last week in ${roundString}`)
+      console.log(output.conflicts)
+    }
+  }
+
+  for (let player of newScrewedPlayers) {
+    if (oldScrewedPlayers.includes(player)) {
+      output.conflicts.push(`${player} fought a top seed early last week, give them a break if you can`)
+    }
+  }
+  // console.log(output)
+  return output
+}
+
+function bracketType (participantCount) {
+  if (powerOf2(participantCount)) {
+    return 'round'
+  } else if (powerOf2(participantCount + participantCount / 2)) {
+    return 'half round'
+  }
+  return 'not round'
 }
 
 function powerOf2 (n) {

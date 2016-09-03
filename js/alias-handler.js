@@ -12,6 +12,7 @@ var Aliases = {}
 Aliases.bigList = {
   'Dubs': {
     'Dubs': 0
+    // note - this player never actually existed
   },
 
   'Satchel': {
@@ -248,7 +249,8 @@ Aliases.bigList = {
   'Dub': {
     'Dub': 3,
     'Snake Cream Dubs': 1,
-    'Snake Cream': 1
+    'Snake Cream': 1,
+    '2 bucks (dubs)': 1
   },
 
   'Lime': {
@@ -344,6 +346,10 @@ Aliases.bigList = {
 
   'Marcozimbabwe': {
     'Marcozimbabwe': 1
+  },
+
+  'GEEZer': {
+    'GEEZer': 0
   }
 }
 
@@ -389,8 +395,8 @@ Aliases.lookupAlias = function (tagToFind, addIfNotFound = false, entryNumParam 
   }
 
   // Tag not found anywhere
-  console.log(`'${tagToFind}' not found in database.`)
-  return tagToFind
+  // console.log(`'${tagToFind}' not found in database.`)
+  return 0
 }
 
 // This function finds every non-standard alias in an array of tags and converts it to standard
@@ -400,6 +406,7 @@ Aliases.lookupAlias = function (tagToFind, addIfNotFound = false, entryNumParam 
 Aliases.cleanAliasesInArray = function (inputArray) {
   for (let tag of inputArray) {
     console.log(tag)
+    // lol it does nothing yet
   }
 }
 

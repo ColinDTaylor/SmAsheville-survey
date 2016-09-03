@@ -1,0 +1,8 @@
+<ul>
+  {{#each data.conflicts}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+{{#if data.unknowns}}
+  <p> I'm not familiar with the tags: {{data.unknowns}} </p>
+{{/if}}

@@ -1,0 +1,10 @@
+body {
+  font-family: sans-serif;
+  background-color: #fefefe;
+  color: #2a3744;
+  font-size: 1.25rem;
+}
+
+li {
+  margin-top: 3px;
+}
