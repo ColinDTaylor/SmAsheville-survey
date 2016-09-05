@@ -20,6 +20,9 @@ Checker.create = function (oldTournament, newTournament) {
     this.old.idTable = associateIds(this.old.participants)
     this.new.idTable = associateIds(this.new.participants)
 
+    this.old.projectedR2 = projectRound2(this.old)
+    this.new.projectedR2 = projectRound2(this.new)
+
     this.old.matchTable = createMatchTable(this.old)
     this.new.matchTable = createMatchTable(this.new)
 
@@ -81,10 +84,22 @@ function createMatchTable (tournament) {
     let [p1Id, p2Id] = [match.player1Id, match.player2Id]
     // all of the positive rounds are -1 here to clear up confusion about r3 being kinda really r2
     let round = match.round >= 0 ? match.round - 1 : match.round
+    let projectedMatches = []
     let roundsChecked
 
     // If our bracket isn't a perfect power of 2, look at round 3 and -2 also
     // If it's halfway between two powers of 2, ignore -2 (loser's only has one r1 then)
+
+    console.log(item)
+
+    // If I sorted the players by seed, I could use that list to create a projection
+    // this would help me determine who might have to fight who early on
+    // because I never check losers r3, if I always assume p1 advances, I should be fine
+    // since losers r3 is where seeds start occasionally being swapped even in a perfect projection
+
+    if (match.state === 'pending') {
+
+    }
 
     switch (bracketType(ids.participantCount)) {
       case 'round': roundsChecked = [0, 1, -1]; break
@@ -168,7 +183,7 @@ function findConflicts (newTournament, oldTournament) {
       let roundString = round >= 0 ? `winners r${round}` : `losers r${round}`
 
       output.conflicts.push(`${match} happened last week in ${roundString}`)
-      console.log(output.conflicts)
+      // console.log(output.conflicts)
     }
   }
 
@@ -177,8 +192,13 @@ function findConflicts (newTournament, oldTournament) {
       output.conflicts.push(`${player} fought a top seed early last week, give them a break if you can`)
     }
   }
-  // console.log(output)
   return output
+}
+
+function projectRound2 (tournament) {
+  for (let match of tournament.matches) {
+    // console.log(match)
+  }
 }
 
 function bracketType (participantCount) {
