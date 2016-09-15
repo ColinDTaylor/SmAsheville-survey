@@ -20,14 +20,13 @@ Checker.create = function (oldTournament, newTournament) {
     this.old.idTable = associateIds(this.old.participants)
     this.new.idTable = associateIds(this.new.participants)
 
-    this.old.projectedR2 = projectRound2(this.old)
-    this.new.projectedR2 = projectRound2(this.new)
+    // this.old.projectedR2 = projectRound2(this.old)
+    // this.new.projectedR2 = projectRound2(this.new)
 
     this.old.matchTable = createMatchTable(this.old)
     this.new.matchTable = createMatchTable(this.new)
 
     return findConflicts(this.new, this.old)
-
     // return this
   })
 }
@@ -79,27 +78,23 @@ function associateIds (participants) {
 function createMatchTable (tournament) {
   let output = {'all': [], 'strings': []}
   let ids = tournament.idTable
-  tournament.matches.map((item) => {
+  for (let item of tournament.matches) {
     let match = item.match
     let [p1Id, p2Id] = [match.player1Id, match.player2Id]
     // all of the positive rounds are -1 here to clear up confusion about r3 being kinda really r2
     let round = match.round >= 0 ? match.round - 1 : match.round
-    let projectedMatches = []
+
     let roundsChecked
 
     // If our bracket isn't a perfect power of 2, look at round 3 and -2 also
     // If it's halfway between two powers of 2, ignore -2 (loser's only has one r1 then)
 
-    console.log(item)
+    // console.log(match)
 
     // If I sorted the players by seed, I could use that list to create a projection
     // this would help me determine who might have to fight who early on
     // because I never check losers r3, if I always assume p1 advances, I should be fine
     // since losers r3 is where seeds start occasionally being swapped even in a perfect projection
-
-    if (match.state === 'pending') {
-
-    }
 
     switch (bracketType(ids.participantCount)) {
       case 'round': roundsChecked = [0, 1, -1]; break
@@ -107,26 +102,56 @@ function createMatchTable (tournament) {
       case 'not round': roundsChecked = [0, 1, 2, -1, -2]; break
     }
 
-    if (roundsChecked.includes(round)) {
-      let players = []
+    if (!roundsChecked.includes(round)) {
+      continue
+    }
 
+    let players = []
+
+    // If the match doesn't have both players yet
+    if (match.state === 'pending') {
+      // create an array of the two prerequisit match IDs
+      let prereqMatches = [match.player1PrereqMatchId, match.player2PrereqMatchId]
+
+      // console.log('#######################  ' + match.round)
+
+      if (prereqMatches[0] !== null) {
+        // passing the whole tournament to this makes my life a lot easier
+        players.push(ids[getProjectedMatchWinner(prereqMatches[0], tournament, match.player1IsPrereqMatchLoser)])
+      } else {
+        // If there is no prereq match ID for p1, then p1 must already exist
+        players.push(ids[p1Id])
+      }
+      // This was MUCH harder to read as a loop, so I'm repeating the code
+
+      if (prereqMatches[1] !== null) {
+        // passing the whole tournament to this makes my life a lot easier
+        players.push(ids[getProjectedMatchWinner(prereqMatches[1], tournament, match.player2IsPrereqMatchLoser)])
+      } else {
+        // If there is no prereq match ID for p2, then p2 must already exist
+        players.push(ids[p2Id])
+      }
+    } else {
+      // match must have both players in it
       players.push(ids[p1Id])
       players.push(ids[p2Id])
-
-      // The match arrays all need to be in the same order so they can be compared
-      let matchArray = players.sort()
-
-      output.strings.push(matchArray.join(' vs '))
-
-      matchArray.push(round)
-
-      output.all.push(matchArray)
-
-      // If output already has an array for this round, push the match array to it
-      // If the array doesn't alreay exist, make it and add the match array
-      output[round] ? output[round].push(matchArray) : output[round] = [matchArray]
     }
-  })
+
+    console.log(players)
+
+    // The match arrays all need to be in the same order so they can be compared
+    let matchArray = players.sort()
+
+    output.strings.push(matchArray.join(' vs '))
+
+    matchArray.push(round)
+
+    output.all.push(matchArray)
+
+    // If output already has an array for this round, push the match array to it
+    // If the array doesn't alreay exist, make it and add the match array
+    output[round] ? output[round].push(matchArray) : output[round] = [matchArray]
+  }
 
   return output
 }
@@ -195,10 +220,44 @@ function findConflicts (newTournament, oldTournament) {
   return output
 }
 
-function projectRound2 (tournament) {
-  for (let match of tournament.matches) {
-    // console.log(match)
+function getProjectedMatchWinner (matchId, tournament, findLoser) {
+  let prereqId
+  let output
+  let checkedPlayer
+  let checkedType
+  // Use the ID to grab the match object
+  let matchObject = tournament.matches.find(item => {
+    return item.match.id === matchId
+  })
+
+  // because our actual data is nested in an object called "match", grab that
+  let theMatch = matchObject.match
+
+  // if the match isn't in the tournament I don't even know what to tell you man just panic
+  if (!theMatch) {
+    return 'oh god something went horribly wrong'
   }
+
+  // If we're looking for the loser, grab p2 instead
+  if (!findLoser) {
+    checkedPlayer = theMatch.player1Id
+    checkedType = theMatch.player1IsPrereqMatchLoser
+    prereqId = theMatch.player1PrereqMatchId
+  } else {
+    checkedPlayer = theMatch.player2Id
+    checkedType = theMatch.player2IsPrereqMatchLoser
+    prereqId = theMatch.player2PrereqMatchId
+  }
+
+  // if p1 (the projected winner in every round we're checking) doesn't exist yet, RECURSION
+  if (checkedPlayer === null) {
+    // If we're grabbing our projected p1 from winners, then we want to grab the projected LOSER
+    output = getProjectedMatchWinner(prereqId, tournament, checkedType)
+  } else {
+    output = checkedPlayer
+  }
+
+  return output
 }
 
 function bracketType (participantCount) {
