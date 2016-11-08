@@ -41,7 +41,7 @@ router.get('/more-like-surGAY', function (req, res, next) {
 
 const playerArray = [
   'Cold',
-  'Pelipper',
+  'Wingull/Pelipper',
   'Ryko',
   'Pants',
   'QueTPie',
