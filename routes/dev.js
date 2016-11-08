@@ -3,7 +3,11 @@ var router = express.Router()
 var api = require('../js/api-get')
 var database = require('../js/mongoose-main').Operations
 var queries = require('../js/queries')
-var prdata = require('../js/pr-data.js')
+var prdata = require('../js/pr-data')
+var aliasHandler = require('../js/alias-handler')
+// var apib = require('../js/api-basics')
+var challongeAPI = require('challonge-node')
+const challonge = challongeAPI.withAPIKey('hvA3eLb7hzOGS5py3PM3ZaGJAlRHTACaktnlobkQ')
 
 router.get('/', (req, res, next) => {
   res.send('This dev url is for use by PRIME NERDS ONLY')
@@ -41,9 +45,11 @@ router.get('/jesus/thesedangnerds/iswearimactuallyalmostdone/ivebeensuperbusy/he
   })
 })
 
-router.get('/test', (req, res, next) => {
+router.get('/generate_condorcet', (req, res, next) => {
   prdata.handleLists().then(rawData => {
     // TODO: add this to a real, permanent function
+
+    // This is just a way to render the PR data in a form that the condorcet generator can handle
     let output = ''
 
     for (let list of rawData) {
@@ -52,6 +58,25 @@ router.get('/test', (req, res, next) => {
 
     res.render('dev', {testData: output})
   })
+})
+
+router.get('/homo/:alias', (req, res, next) => {
+  // 'homo' for homogenize, obviously
+  res.send(aliasHandler.processAlias(req.params.alias))
+})
+
+router.get('/startTournament/:t_id', (req, res, next) => {
+  challonge.tournaments.start(req.params.t_id).then(stuff => {
+    console.log(stuff)
+  })
+  res.send('doot doot')
+})
+
+router.get('/resetTournament/:t_id', (req, res, next) => {
+  challonge.tournaments.reset(req.params.t_id).then(stuff => {
+    console.log(stuff)
+  })
+  res.send('deet deet')
 })
 
 module.exports = router

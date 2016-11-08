@@ -419,3 +419,16 @@ let hasOwnPropertyCI = function (obj, prop) {
         return v.toLowerCase() === prop.toLowerCase()
       }).length > 0
 }
+
+Aliases.processAlias = function (alias) {
+  return alias
+    // remove sponsor tags using pipes,
+    // along with all characters within parenthesis or brackets at the end of the string.
+    .substring(alias.search(/\|/g) + 1, alias.search(/[[({<][^({[<]+[\])}>]$/g) - 1)
+    // remove all whitespace characters
+    .replace(/\s/g, '')
+    // remove certain special characters
+    .replace(/['"`\-_,\\\/~*&#@!^?]/g, '')
+    // change all characters to lowercase
+    .toLowerCase()
+}

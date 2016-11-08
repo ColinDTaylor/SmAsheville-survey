@@ -1,0 +1,4 @@
+If you can't get this to work after building it, it's because the dist of challonge-node I'm
+using is one I personally modified to add the challonge "reset" command. it should be pretty
+easy to re-add if I ever need to for some reason, but anyone else building this site might run
+into an issue when npm install just gives them the regular version of challonge-node.

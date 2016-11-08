@@ -55,7 +55,7 @@ let tournamentSchema = new Schema({
   fullChallongeUrl: String,
   liveImageUrl: String,
   gameName: String,
-  progressMeter: Number // TODO: use this to verify that all tournaments have been completed
+  progressMeter: Number
 })
 
 let matchSchema = new Schema({
@@ -82,9 +82,9 @@ let seasonSchema = new Schema({
 /* ---------- Models ---------- */
 // TODO: move several of these models over to their respective functions
 // TODO: how can I make the collection used by these modular?
-Models.SurveyResponses = mongoose.model('summer_2016.surveyresponse', surveyResponseSchema)
-Models.Participants = mongoose.model('summer_2016.participant', participantSchema)
-Models.Tournaments = mongoose.model('summer_2016.tournament', tournamentSchema)
+Models.SurveyResponses = mongoose.model('fall_2016.surveyresponse', surveyResponseSchema)
+Models.Participants = mongoose.model('fall_2016.participant', participantSchema)
+Models.Tournaments = mongoose.model('fall_2016.tournament', tournamentSchema)
 Models.Matches = mongoose.model('cleanTest.match', matchSchema)
 // let Top8Getter = mongoose.model('cleanTest.top8getter', top8GettersSchema)
 

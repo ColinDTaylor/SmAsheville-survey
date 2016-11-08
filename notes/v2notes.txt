@@ -1,0 +1,9 @@
+Tools used from the start
+-------------------------
+  • Codebase   : Node.js v 6.8
+  • CSS engine : Sass/Less
+  • Server     : Express 4
+  • Database   : MongoDB 3.2
+  • ODM        : Mongoose
+  • Code style : StandardJS
+  • Templating : Pug

@@ -1,3 +1,5 @@
+// NOTE: Almost all of this is deprecated at this point and replaced by the queries module
+
 // TODO: I think most of what this is currently doing can be accomplished by the queries module
 
 var aliasHandler = require('./alias-handler.js')
@@ -40,9 +42,6 @@ PrData.attendance = function () {
     }
     playerIndex++
   }
-
-  // console.log(outputArray)
-
   // sort the player arrays by attendance, highest to lowest.
   outputArray.sort((a, b) => {
     if (a[1] < b[1]) {
@@ -54,8 +53,6 @@ PrData.attendance = function () {
     // a must equal b
     return 0
   })
-
-  // console.log(outputArray)
   return outputArray
 }
 

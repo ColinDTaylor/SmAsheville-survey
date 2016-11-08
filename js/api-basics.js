@@ -52,6 +52,18 @@ challongeApi.showTournament = function (t_id) {
   })
 }
 
+challongeApi.startTournament = function (t_id) {
+  console.log(t_id)
+  client.tournaments.start({
+    id: t_id,
+    callback: function (err, data) {
+      if (err) { console.log(err) }
+      console.log('successfully strated challonge tournament: ' + t_id)
+    }
+  })
+  console.log('making sure this works lol')
+}
+
 /* --------------------PARTICIPANTS----------------------- */
 
 challongeApi.indexParticipants = function (t_id) {
