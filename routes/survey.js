@@ -50,6 +50,7 @@ const playerArray = [
   'Dembo',
   's.L| Absolome',
   'Avacado',
+  'Vasculinity',
   'MILK',
   'Weis',
   'MP',
