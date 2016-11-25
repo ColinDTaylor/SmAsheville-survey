@@ -9,6 +9,233 @@ var aliasHandler = require('../js/alias-handler')
 var challongeAPI = require('challonge-node')
 const challonge = challongeAPI.withAPIKey('hvA3eLb7hzOGS5py3PM3ZaGJAlRHTACaktnlobkQ')
 
+const prLists =
+[
+{
+  '_id': ObjectId('58224205f670da1c62993da4'),
+  'tag': 'Absolome',
+  'ip_addr': '97.89.146.238',
+  'unranked_players': [ ],
+  'pr_list': [
+    'Cold',
+    'Pelipper',
+    'Ryko',
+    'Pants',
+    'QueTPie',
+    's.L | tenbutts',
+    'KUN$',
+    'Dembo',
+    's.L| Absolome',
+    'MILK',
+    'Avacado',
+    'Vasculinity',
+    'MP',
+    'Weis',
+    'Gravity',
+    'GEEZer'
+  ],
+  'answers': [
+    'Avacado'
+  ],
+  '__v': 0
+},
+{
+  '_id': ObjectId('5823a65c7708373c1d4b847d'),
+  'tag': 'Avacado',
+  'ip_addr': '97.95.253.9',
+  'unranked_players': [ ],
+  'pr_list': [
+    'Wingull/Pelipper',
+    'Cold',
+    'Ryko',
+    'QueTPie',
+    'Pants',
+    'KUN$',
+    's.L | tenbutts',
+    'Avacado',
+    's.L| Absolome',
+    'Dembo',
+    'MILK',
+    'GEEZer',
+    'Vasculinity',
+    'Weis',
+    'MP',
+    'Gravity'
+  ],
+  'answers': [
+    'Avacado'
+  ],
+  '__v': 0
+},
+{
+  '_id': ObjectId('5823b4887708373c1d4b847f'),
+  'tag': 'KUN$',
+  'ip_addr': '24.246.166.150',
+  'unranked_players': [ ],
+  'pr_list': [
+    'Wingull/Pelipper',
+    'Ryko',
+    'QueTPie',
+    'Cold',
+    'Pants',
+    'KUN$',
+    's.L | tenbutts',
+    'Vasculinity',
+    's.L| Absolome',
+    'MILK',
+    'MP',
+    'Avacado',
+    'Dembo',
+    'GEEZer',
+    'Weis',
+    'Gravity'
+  ],
+  'answers': [
+    'Vasculinity'
+  ],
+  '__v': 0
+},
+{
+  '_id': ObjectId('5823c0367708373c1d4b8480'),
+  'tag': 'Vasculinity',
+  'ip_addr': '152.18.120.14',
+  'unranked_players': [ ],
+  'pr_list': [
+    'Wingull/Pelipper',
+    'Cold',
+    'Ryko',
+    'Pants',
+    'QueTPie',
+    's.L| Absolome',
+    's.L | tenbutts',
+    'KUN$',
+    'Dembo',
+    'Vasculinity',
+    'Avacado',
+    'MILK',
+    'Weis',
+    'GEEZer',
+    'MP',
+    'Gravity'
+  ],
+  'answers': [
+    'Ryko'
+  ],
+  '__v': 0
+},
+{
+  '_id': ObjectId('5823edd07708373c1d4b8482'),
+  'tag': 'Pelipper',
+  'ip_addr': '152.18.85.127',
+  'unranked_players': [ ],
+  'pr_list': [
+    'Cold',
+    'Wingull/Pelipper',
+    'Ryko',
+    'Pants',
+    'QueTPie',
+    's.L | tenbutts',
+    'KUN$',
+    's.L| Absolome',
+    'Dembo',
+    'Avacado',
+    'MILK',
+    'Vasculinity',
+    'GEEZer',
+    'MP',
+    'Weis',
+    'Gravity'
+  ],
+  'answers': [
+    'Avacado'
+  ],
+  '__v': 0
+},
+{
+  '_id': ObjectId('5823f20e7708373c1d4b8483'),
+  'tag': 'Ryko',
+  'ip_addr': '75.131.175.237',
+  'unranked_players': [ ],
+  'pr_list': [
+    'Wingull/Pelipper',
+    'Ryko',
+    'Pants',
+    'Cold',
+    'QueTPie',
+    'KUN$',
+    'Vasculinity',
+    's.L | tenbutts',
+    's.L| Absolome',
+    'Dembo',
+    'MILK',
+    'Avacado',
+    'Weis',
+    'MP',
+    'Gravity',
+    'GEEZer'
+  ],
+  'answers': [
+    'Pelipper'
+  ],
+  '__v': 0
+},
+{
+  '_id': ObjectId('583222d47708373c1d4b8486'),
+  'tag': 'Cold',
+  'ip_addr': '152.27.15.204',
+  'unranked_players': [ ],
+  'pr_list': [
+    'Cold',
+    'Wingull/Pelipper',
+    'Pants',
+    'Ryko',
+    'QueTPie',
+    'Dembo',
+    'KUN$',
+    's.L | tenbutts',
+    'Avacado',
+    's.L| Absolome',
+    'Vasculinity',
+    'Gravity',
+    'Weis',
+    'MILK',
+    'GEEZer',
+    'MP'
+  ],
+  'answers': [
+    'MILK'
+  ],
+  '__v': 0
+},
+{
+  '_id': ObjectId('583781a17708373c1d4b8487'),
+  'tag': 'tenbutts',
+  'ip_addr': '97.89.146.238',
+  'unranked_players': [ ],
+  'pr_list': [
+    'Cold',
+    'Wingull/Pelipper',
+    'Ryko',
+    'Pants',
+    'QueTPie',
+    's.L | tenbutts',
+    'KUN$',
+    's.L| Absolome',
+    'Avacado',
+    'MILK',
+    'Vasculinity',
+    'Dembo',
+    'Weis',
+    'MP',
+    'Gravity',
+    'GEEZer'
+  ],
+  'answers': [
+    'Avacado'
+  ],
+  '__v': 0
+}]
+
 router.get('/', (req, res, next) => {
   res.send('This dev url is for use by PRIME NERDS ONLY')
 })
@@ -46,18 +273,16 @@ router.get('/jesus/thesedangnerds/iswearimactuallyalmostdone/ivebeensuperbusy/he
 })
 
 router.get('/generate_condorcet', (req, res, next) => {
-  prdata.handleLists().then(rawData => {
-    // TODO: add this to a real, permanent function
+  // TODO: add this to a real, permanent function
 
-    // This is just a way to render the PR data in a form that the condorcet generator can handle
-    let output = ''
+  // This is just a way to render the PR data in a form that the condorcet generator can handle
+  let output = ''
 
-    for (let list of rawData) {
-      output += (`${list.pr_list.join(' > ')} \n\n`)
-    }
+  for (let list of prLists) {
+    output += (`${list.pr_list.join(' > ')} \n\n`)
+  }
 
-    res.render('dev', {testData: output})
-  })
+  res.render('dev', {testData: output})
 })
 
 router.get('/homo/:alias', (req, res, next) => {

@@ -101,7 +101,7 @@ PrData.notableWins = function (input) {}
 PrData.notableLosses = function (input) {}
 
 PrData.handleLists = function () {
-  // TODO: set this function up to actually accupt an input
+  // TODO: set this function up to actually aceupt an input
 
   return queries.getSurveylists().then(data => {
     return data
