@@ -12,7 +12,7 @@ const challonge = challongeAPI.withAPIKey('hvA3eLb7hzOGS5py3PM3ZaGJAlRHTACaktnlo
 const prLists =
 [
 {
-  '_id': ObjectId('58224205f670da1c62993da4'),
+  '_id': 'garbage' ,
   'tag': 'Absolome',
   'ip_addr': '97.89.146.238',
   'unranked_players': [ ],
@@ -40,7 +40,7 @@ const prLists =
   '__v': 0
 },
 {
-  '_id': ObjectId('5823a65c7708373c1d4b847d'),
+  '_id': 'garbage' ,
   'tag': 'Avacado',
   'ip_addr': '97.95.253.9',
   'unranked_players': [ ],
@@ -68,7 +68,7 @@ const prLists =
   '__v': 0
 },
 {
-  '_id': ObjectId('5823b4887708373c1d4b847f'),
+  '_id': 'garbage' ,
   'tag': 'KUN$',
   'ip_addr': '24.246.166.150',
   'unranked_players': [ ],
@@ -96,7 +96,7 @@ const prLists =
   '__v': 0
 },
 {
-  '_id': ObjectId('5823c0367708373c1d4b8480'),
+  '_id': 'garbage' ,
   'tag': 'Vasculinity',
   'ip_addr': '152.18.120.14',
   'unranked_players': [ ],
@@ -124,7 +124,7 @@ const prLists =
   '__v': 0
 },
 {
-  '_id': ObjectId('5823edd07708373c1d4b8482'),
+  '_id': 'garbage' ,
   'tag': 'Pelipper',
   'ip_addr': '152.18.85.127',
   'unranked_players': [ ],
@@ -152,7 +152,7 @@ const prLists =
   '__v': 0
 },
 {
-  '_id': ObjectId('5823f20e7708373c1d4b8483'),
+  '_id': 'garbage' ,
   'tag': 'Ryko',
   'ip_addr': '75.131.175.237',
   'unranked_players': [ ],
@@ -180,7 +180,7 @@ const prLists =
   '__v': 0
 },
 {
-  '_id': ObjectId('583222d47708373c1d4b8486'),
+  '_id': 'garbage' ,
   'tag': 'Cold',
   'ip_addr': '152.27.15.204',
   'unranked_players': [ ],
@@ -208,7 +208,7 @@ const prLists =
   '__v': 0
 },
 {
-  '_id': ObjectId('583781a17708373c1d4b8487'),
+  '_id': 'garbage' ,
   'tag': 'tenbutts',
   'ip_addr': '97.89.146.238',
   'unranked_players': [ ],
